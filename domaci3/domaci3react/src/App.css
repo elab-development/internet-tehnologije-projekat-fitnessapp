@@ -11,12 +11,12 @@
 }
 .allWorkouts{
   margin: 10px;
-  display: inline-block;
+  display: flex;
   width: 64px;
   height: auto;
   text-decoration: none;
-  flex-direction: row;
-    display: flex;
+  flex-direction: column;
+
 }
 .cardtitle{
   text-transform: uppercase;
@@ -32,13 +32,14 @@
   max-width: 300px;
   text-align: center;
   margin: 30px;
+  display: flex;
 }
 .imgcard{
   
-    width:  200px;
-    height: 200px;
+    width:  250px;
+    height: 250px;
     
-    object-fit: cover;
+    object-fit: fill;
 }
 a {
   color: black;
@@ -53,4 +54,24 @@ a {
 }
 .counter{
   margin-left: 10px;
+}
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.pagination button {
+  width: 40px;
+  height: 40px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color:black;
+  border-color: #eee;
 }

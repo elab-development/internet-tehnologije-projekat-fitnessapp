@@ -3,12 +3,15 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Workouts from './components/Workouts';
 import MyWorkouts from './components/MyWorkouts';
+import Pagination from './components/Pagination';
 import { useState } from 'react';
 import {BrowserRouter,Routes, Route, Link} from "react-router-dom";
 function App() {
   
   const[calorieCounter,setCalorieCounter]=useState(0);
   const[chosenWorkouts,setChosenWorkouts]=useState([]);
+  const[currentPage,setCurrentPage]=useState(1);
+  const[workoutsPerPage,setWorkoutsPerPage]=useState(1);
   const [workouts,setWorkouts]=useState([
     {
         id:1,
@@ -62,14 +65,20 @@ function App() {
     setCalorieCounter(calorieCounter-calorie_burn);
   }
  
-
+   const lastPointIndex=currentPage*workoutsPerPage;
+   const firstPointIndex=lastPointIndex-workoutsPerPage;
+   const currentWorkout=workouts.slice(firstPointIndex,lastPointIndex);
   
   return (
     <BrowserRouter className="App">
        <Navbar calorieCounter={calorieCounter}/>
+       <Pagination totalWorkouts={workouts.length} 
+                    workoutsPerPage={workoutsPerPage}
+                    setCurrentPage={setCurrentPage}/>
       <Routes>
-        <Route path='/' element={<Workouts workouts={workouts} onAdd={addWorkout} onRemove={removeWorkout} />}/>
+        <Route path='/' element={<Workouts workouts={currentWorkout} onAdd={addWorkout} onRemove={removeWorkout} />}/>
         <Route path='/myWorkouts' element={<MyWorkouts workouts={chosenWorkouts}/>}/>
+        
       </Routes>
      
     </BrowserRouter>
