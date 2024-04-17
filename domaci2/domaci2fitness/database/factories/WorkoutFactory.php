@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Trainer;
+use App\Models\User;
+use App\Models\WorkoutType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WorkoutFactory extends Factory
@@ -14,7 +17,12 @@ class WorkoutFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'description'=>$this->faker->paragraph(),
+            'duration'=>$this->faker->randomNumber(),
+            'user_id' => User::factory(),
+            
+            'trainer_id'=>Trainer::factory(),
+            'type_id'=>WorkoutType::factory()
         ];
     }
 }

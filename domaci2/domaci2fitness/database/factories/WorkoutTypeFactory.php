@@ -14,7 +14,7 @@ class WorkoutTypeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'type'=> $this->faker->paragraph(),
         ];
     }
 }
