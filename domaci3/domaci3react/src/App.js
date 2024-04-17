@@ -2,7 +2,9 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Workouts from './components/Workouts';
+import MyWorkouts from './components/MyWorkouts';
 import { useState } from 'react';
+import {BrowserRouter,Routes, Route, Link} from "react-router-dom";
 function App() {
   
   const[calorieCounter,setCalorieCounter]=useState(0);
@@ -44,11 +46,14 @@ function App() {
     setCalorieCounter(calorieCounter-calorie_burn);
   }
   return (
-    <div className="App">
-     <Navbar calorieCounter={calorieCounter}/>
-     <Workouts workouts={workouts} onAdd={addWorkout} onRemove={removeWorkout}/>
-
-    </div>
+    <BrowserRouter className="App">
+       <Navbar calorieCounter={calorieCounter}/>
+      <Routes>
+        <Route path='/' element={<Workouts workouts={workouts} onAdd={addWorkout} onRemove={removeWorkout} />}/>
+        <Route path='/myWorkouts' element={<MyWorkouts/>}/>
+      </Routes>
+     
+    </BrowserRouter>
   );
 }
 
