@@ -44,7 +44,7 @@ class TrainerController extends Controller
         $validation=Validator::make($request->all(),[
             'name'=>'required|max:100|string',
             'licence_number'=>'required|min:5',
-            'email'=>'required|email|unique'
+            'email'=>'required|email|unique:trainers'
         ]);
         if($validation->fails()){
             return response()->json($validation->errors());
@@ -91,7 +91,7 @@ class TrainerController extends Controller
     {
         $validation=Validator::make($request->all(),[
             'name'=>'required|string|max:20',
-            'licence_number'=>'required|max:20|numeric|unique:trainers',
+            'licence_number'=>'required|max:20|numeric',
             'email'=>'required|email|unique:trainers'
         ]);
         if($validation->fails()){
