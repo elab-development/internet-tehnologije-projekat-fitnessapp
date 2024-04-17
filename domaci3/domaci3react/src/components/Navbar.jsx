@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <div className='navbar'>
-      
+      <a href="/">My workouts</a>
 
     
       

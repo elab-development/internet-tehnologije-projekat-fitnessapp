@@ -2,12 +2,13 @@ import React from 'react';
 
 
 import OneWorkout from './OneWorkout';
-function Workouts({workouts}) {
+function Workouts({workouts,onAdd}) {
   
 return (
   <div className='allWorkouts'>
-     <OneWorkout workouts={workouts[0]}/>
-     <OneWorkout workouts={workouts[1]}/>
+     {workouts.map((work)=>(
+        <OneWorkout workouts={work} key={work.id} onAdd={onAdd}/>
+     ))}
    </div>
   );
 };

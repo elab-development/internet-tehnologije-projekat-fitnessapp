@@ -33,6 +33,9 @@ function App() {
         calorie_burn:"100 cal"
     }
   ];
+  function onAdd(title){
+    console.log("dodat"+title);
+  };
   return (
     <div className="App">
      <Navbar/>

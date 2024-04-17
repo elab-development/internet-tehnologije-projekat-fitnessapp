@@ -1,9 +1,9 @@
 import React from 'react'
 import { TfiCheck } from "react-icons/tfi";
 
-function OneWorkout({workouts}) {
-  function onAdd(){
-    console.log("dodat");
+function OneWorkout({workouts,onAdd}) {
+  function onAdd(title){
+    console.log("dodat"+title);
   };
     
   return (
@@ -15,7 +15,7 @@ function OneWorkout({workouts}) {
        <h2 className='cardtitle'>{workouts.title}</h2>
        <h4 className='cardduration'>{workouts.duration}</h4>
        <h4 className='cardcalorie'>{workouts.calorie_burn}</h4>
-       <button className='btn' onClick={onAdd}><TfiCheck/></button>
+       <button className='btn' onClick={()=>onAdd(workouts.title)}><TfiCheck/></button>
     
        </div>
       
