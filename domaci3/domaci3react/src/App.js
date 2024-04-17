@@ -50,7 +50,7 @@ function App() {
        <Navbar calorieCounter={calorieCounter}/>
       <Routes>
         <Route path='/' element={<Workouts workouts={workouts} onAdd={addWorkout} onRemove={removeWorkout} />}/>
-        <Route path='/myWorkouts' element={<MyWorkouts/>}/>
+        <Route path='/myWorkouts' element={<MyWorkouts workouts={workouts}/>}/>
       </Routes>
      
     </BrowserRouter>

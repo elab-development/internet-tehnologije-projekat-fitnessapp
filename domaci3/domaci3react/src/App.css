@@ -45,3 +45,12 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
+.workout-items{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 50px;
+}
+.counter{
+  margin-left: 10px;
+}
