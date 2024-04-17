@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class WorkoutType extends Model
 {
     use HasFactory;
+    protected $fillable=['type'];
+    public function workoutTypes(){
+        return $this->hasMany(Workout::class);
+    }
 }
