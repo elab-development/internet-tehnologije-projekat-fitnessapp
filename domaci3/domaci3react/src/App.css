@@ -1,38 +1,35 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.navbar{
   display: flex;
-  flex-direction: column;
+  background-color: antiquewhite;
+  padding: 0 15px;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  min-height: 40px;
+  font-size: large;
+  border-bottom-style: solid;
+  direction: row;
+  width: 100%;
 }
-
-.App-link {
-  color: #61dafb;
+.cardbody{
+  margin: 10px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cardtitle{
+  text-transform: uppercase;
+  margin: 20px;
+  text-align: center;
+  font-size: 25px;
+}
+.oneWorkout{
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgb(211, 211, 211);
+  border-radius: 10px;
+  max-width: 300px;
+  text-align: center;
+  margin: 30px;
+}
+.imgcard{
+  float: left;
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
 }
