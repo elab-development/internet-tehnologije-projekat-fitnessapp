@@ -13,8 +13,8 @@ class ChangeWorkoutTypeIdToTypeIdInTableWorkout extends Migration
      */
     public function up()
     {
-        Schema::table('Workout', function (Blueprint $table) {
-            //
+        Schema::table('workouts', function (Blueprint $table) {
+            $table->renameColumn('workout_type_id','type_id');
         });
     }
 
