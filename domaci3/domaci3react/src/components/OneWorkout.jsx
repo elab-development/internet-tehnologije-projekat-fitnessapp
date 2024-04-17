@@ -17,11 +17,11 @@ function OneWorkout({workouts,onAdd,onRemove,inMyWorkouts}) {
        <h4 className='cardcalorie'>{workouts.calorie_burn}</h4>
        {inMyWorkouts=== 1 ? (
         <>
-       <button className='btn' onClick={()=>onAdd(workouts.calorie_burn)}><TfiCheck/></button>
+       <button className='btn' onClick={()=>onAdd(workouts.calorie_burn,workouts.id)}><TfiCheck/></button>
        <button className='btn' onClick={()=>onRemove(workouts.calorie_burn)}><VscDiffRemoved/></button>
        </>
       ):(
-        <h4>Calories: {workouts.calorie_burn}</h4>
+        <h4>Number of selections: {workouts.count}</h4>
       )}
     
        </div>
