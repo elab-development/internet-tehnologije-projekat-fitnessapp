@@ -7,7 +7,7 @@ function Workouts({workouts,onAdd,onRemove}) {
 return (
   <div className='allWorkouts'>
      {workouts.map((work)=>(
-        <OneWorkout workouts={work} key={work.id} onAdd={onAdd} onRemove={onRemove}/>
+        <OneWorkout workouts={work} key={work.id} onAdd={onAdd} onRemove={onRemove} inMyWorkouts={1}/>
      ))}
    </div>
   );

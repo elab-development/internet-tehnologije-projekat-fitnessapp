@@ -3,7 +3,7 @@ import { TfiCheck } from "react-icons/tfi";
 import { VscDiffRemoved } from "react-icons/vsc";
 
 
-function OneWorkout({workouts,onAdd,onRemove}) {
+function OneWorkout({workouts,onAdd,onRemove,inMyWorkouts}) {
  
     
   return (
@@ -15,8 +15,14 @@ function OneWorkout({workouts,onAdd,onRemove}) {
        <h2 className='cardtitle'>{workouts.title}</h2>
        <h4 className='cardduration'>{workouts.duration}</h4>
        <h4 className='cardcalorie'>{workouts.calorie_burn}</h4>
+       {inMyWorkouts=== 1 ? (
+        <>
        <button className='btn' onClick={()=>onAdd(workouts.calorie_burn)}><TfiCheck/></button>
        <button className='btn' onClick={()=>onRemove(workouts.calorie_burn)}><VscDiffRemoved/></button>
+       </>
+      ):(
+        <h4>Calories: {workouts.calorie_burn}</h4>
+      )}
     
        </div>
       
