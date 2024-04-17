@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\TrainerWorkoutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserWorkoutController;
 use App\Http\Controllers\WorkoutController;
@@ -22,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('workout',WorkoutController::class)->only(['index']);
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-Route::resource('workout',WorkoutController::class)->only(['index']);
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
@@ -33,8 +35,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('trainers',TrainerController::class);
     Route::resource('workouts',WorkoutController::class);
     Route::post('/logout',[AuthController::class,'logout']);
-    Route::get('user/{user_id}/workout',[UserWorkoutController::class,'index']);
+    Route::get('user/{id}/workout',[UserWorkoutController::class,'index']);
     Route::get('/users',[UserController::class,'index']);
-    Route::get('/users/{user_id}',[UserController::class,'show']);
+    Route::get('/users/{id}',[UserController::class,'show']);
+    Route::get('trainer/{id}/workout',[TrainerWorkoutController::class,'index']);
    
 });
