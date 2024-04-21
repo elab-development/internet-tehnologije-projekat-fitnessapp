@@ -73,16 +73,18 @@ function App() {
   
   return (
     <BrowserRouter className="App">
-       <Navbar calorieCounter={calorieCounter}/>
+      
        <Pagination totalWorkouts={workouts.length} 
                     workoutsPerPage={workoutsPerPage}
                     setCurrentPage={setCurrentPage}/>
                     
       <Routes>
+      <Route path='/' element={<Navbar  calorieCounter={calorieCounter}/>}/>
         <Route path='/' element={<Workouts workouts={currentWorkout} onAdd={addWorkout} onRemove={removeWorkout} />}/>
         <Route path='/myWorkouts' element={<MyWorkouts workouts={chosenWorkouts}/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/register' element={<RegisterPage/>}/>
+       
         
       </Routes>
      

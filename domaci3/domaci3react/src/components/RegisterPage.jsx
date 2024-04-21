@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function RegisterPage() {
     const [userData,setUserData]=useState({
         "name":"",
         "email":"",
         "password":""
     });
+    let navigate=useNavigate();
     function handleInput(e){
         let newUser=userData;
         newUser[e.target.name]=e.target.value;
@@ -15,8 +17,9 @@ function RegisterPage() {
     }
     function handleRegister(e){
         e.preventDefault();
-        axios.post("http://127.0.0.1:8000/api/register",userData).then((res)=>{
+        axios.post("api/register",userData).then((res)=>{
             console.log(res.data);
+            navigate("/login");
         }).catch((err)=>{
             console.log(err);
         });
@@ -38,7 +41,7 @@ function RegisterPage() {
                   </div>
   
                   <form onSubmit={handleRegister}>
-                    <p>Register</p>
+                    
 
                     <div data-mdb-input-init className="form-outline mb-4">
                       <input type="name" id="form2Example11" 
@@ -50,7 +53,7 @@ function RegisterPage() {
                     <div data-mdb-input-init className="form-outline mb-4">
                       <input type="email" id="form2Example11" 
                       className="form-control" name="email"
-                        placeholder="Phone number or email address" onInput={handleInput} />
+                        placeholder="Email address" onInput={handleInput} />
                       <label className="form-label" htmlFor="form2Example11">Email</label>
                     </div>
   

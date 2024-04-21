@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 function LoginPage() {
     const [userData,setUserData]=useState({
         "email":"",
         "password":""
     });
+    let navigate=useNavigate();
     function handleInput(e){
         let newUser=userData;
         newUser[e.target.name]=e.target.value;
@@ -14,10 +16,11 @@ function LoginPage() {
     }
     function handleLogin(e){
         e.preventDefault();
-        axios.post("http://127.0.0.1:8000/api/login",userData).then((res)=>{
+        axios.post("api/login",userData).then((res)=>{
             console.log(res.data);
             if(res.data.success===true){
               window.sessionStorage.setItem("auth_token",res.data.auth_token);
+              navigate("/");
             }
         }).catch((err)=>{
             console.log(err);
@@ -45,8 +48,8 @@ function LoginPage() {
                   <div data-mdb-input-init className="form-outline mb-4">
                     <input type="email" id="form2Example11" 
                     className="form-control" name="email"
-                      placeholder="Phone number or email address" onInput={handleInput} />
-                    <label className="form-label" htmlFor="form2Example11">Username</label>
+                      placeholder="Email address" onInput={handleInput} />
+                    <label className="form-label" htmlFor="form2Example11">Email</label>
                   </div>
 
                   <div data-mdb-input-init className="form-outline mb-4">
