@@ -34,13 +34,13 @@ class AuthController extends Controller
     }
     public function login(Request $request){
         if(!Auth::attempt($request->only('email', 'password'))){
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['success'=>false], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'Login successful! ' . $user->name, 'auth_token' => $token,'token_type'=>'Bearer'], 200);
+        return response()->json([ 'success'=>true, 'auth_token' => $token,'token_type'=>'Bearer'], 200);
     }
     public function logout(Request $request)
     {

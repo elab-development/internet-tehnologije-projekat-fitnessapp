@@ -16,6 +16,9 @@ function LoginPage() {
         e.preventDefault();
         axios.post("http://127.0.0.1:8000/api/login",userData).then((res)=>{
             console.log(res.data);
+            if(res.data.success===true){
+              window.sessionStorage.setItem("auth_token",res.data.auth_token);
+            }
         }).catch((err)=>{
             console.log(err);
         });

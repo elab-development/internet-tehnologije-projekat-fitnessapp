@@ -7,6 +7,7 @@ import Pagination from './components/Pagination';
 import { useState } from 'react';
 import {BrowserRouter,Routes, Route, Link} from "react-router-dom";
 import LoginPage from './components/LoginPage';
+import RegisterPage from './components/RegisterPage';
 function App() {
   
   const[calorieCounter,setCalorieCounter]=useState(0);
@@ -76,10 +77,12 @@ function App() {
        <Pagination totalWorkouts={workouts.length} 
                     workoutsPerPage={workoutsPerPage}
                     setCurrentPage={setCurrentPage}/>
-                    <LoginPage/>
+                    
       <Routes>
         <Route path='/' element={<Workouts workouts={currentWorkout} onAdd={addWorkout} onRemove={removeWorkout} />}/>
         <Route path='/myWorkouts' element={<MyWorkouts workouts={chosenWorkouts}/>}/>
+        <Route path='/login' element={<LoginPage/>}/>
+        <Route path='/register' element={<RegisterPage/>}/>
         
       </Routes>
      
