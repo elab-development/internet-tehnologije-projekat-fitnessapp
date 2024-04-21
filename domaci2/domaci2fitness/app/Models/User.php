@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -41,7 +42,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function workouts(){
-        return $this->hasMany(Workout::class);
+    public function myWorkoutPlans(){
+        return $this->hasMany(MyWorkoutPlan::class,'trainer_id');
     }
 }

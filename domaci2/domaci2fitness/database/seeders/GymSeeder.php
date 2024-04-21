@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class WorkoutTypeSeeder extends Seeder
+class GymSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkoutTypesTable extends Migration
+class CreateGymsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateWorkoutTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('workout_types', function (Blueprint $table) {
+        Schema::create('gyms', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('street');
+            $table->string('street_number');
+            $table->string('city');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateWorkoutTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workout_types');
+        Schema::dropIfExists('gyms');
     }
 }

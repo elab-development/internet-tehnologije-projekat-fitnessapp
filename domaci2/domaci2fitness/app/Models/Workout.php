@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Workout extends Model
 {
     use HasFactory;
-    protected $fillable=['duration','description','user_id','trainer_id','type_id'];
+    protected $fillable=['duration','description','title','calorie_counter'];
     public function trainer(){
         return $this->belongsTo(Trainer::class);
     }
-    public function workoutType(){
-        return $this->belongsTo(WorkoutType::class);
-    }
+   
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function gym(){
+        return $this->belongsTo(Gym::class);
     }
 }

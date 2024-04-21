@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeWorkoutTypeIdToTypeIdInTableWorkout extends Migration
+class AddColumnGymIdToTableMyWorkout extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeWorkoutTypeIdToTypeIdInTableWorkout extends Migration
      */
     public function up()
     {
-        Schema::table('workouts', function (Blueprint $table) {
-            $table->renameColumn('workout_type_id','type_id');
+        Schema::table('MyWorkout', function (Blueprint $table) {
+            $table->foreign('gym_id')->references('id')->on('gyms');
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeWorkoutTypeIdToTypeIdInTableWorkout extends Migration
      */
     public function down()
     {
-        Schema::table('Workout', function (Blueprint $table) {
-            $table->renameColumn('type_id','workout_type_id');
+        Schema::table('MyWorkout', function (Blueprint $table) {
+            $table->dropForeign('gym_id');
         });
     }
 }

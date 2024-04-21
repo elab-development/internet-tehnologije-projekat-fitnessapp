@@ -43,7 +43,7 @@ class WorkoutController extends Controller
             'description'=>'required|string|max:255',
             'user_id'=>'required',
             'trainer_id'=>'required',
-            'type_id'=>'required',
+           
         ]);
         if($validation->fails()){
             return response()->json($validation->errors());
@@ -53,7 +53,7 @@ class WorkoutController extends Controller
             'description'=>$request->description,
             'user_id'=>$request->user_id,
             'trainer_id'=>$request->trainer_id,
-            'type_id'=>$request->type_id,
+            
             
             
             ]);
@@ -96,7 +96,7 @@ class WorkoutController extends Controller
             'description'=>'required|string|max:255',
             'user_id'=>'required',
             'trainer_id'=>'required',
-            'type_id'=>'required',
+           
         ]);
         if($validation->fails()){
             return response()->json($validation->errors());
@@ -105,7 +105,7 @@ class WorkoutController extends Controller
         $workout->description=$request->description;
         $workout->user_id=$request->user_id;
         $workout->trainer_id=$request->trainer_id;
-        $workout->type_id=$request->type_id;
+        
         $workout->save();
         return response()->json('Workout is updated successfully.',200);
     }

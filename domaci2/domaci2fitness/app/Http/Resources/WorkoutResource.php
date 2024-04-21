@@ -23,7 +23,7 @@ class WorkoutResource extends JsonResource
             
             'trainer'=>new TrainerResource($this->resource->trainer),
             'user'=>new UserResource($this->resource->user),
-            'workoutType'=>new WorkoutTypeResource($this->resource->workoutType)
+           
         ];
     }
 }
