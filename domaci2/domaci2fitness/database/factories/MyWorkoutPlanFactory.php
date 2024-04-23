@@ -14,12 +14,12 @@ class MyWorkoutPlanFactory extends Factory
     public function definition()
     {
         return [
-            'member_id' => $this->faker->number(),
-            'trainer_id' => $this->faker->numberBetween(1, 5),
-            'gym_id' => $this->faker->number(),
+            'member_id' => $this->faker->randomDigit(),
+            'trainer_id' => $this->faker->randomDigit(),
+            'gym_id' => $this->faker->randomDigit(),
             'date' => $this->faker->date(),
             'time'=>$this->faker->time(),
-            'workout_id'=>$this->faker->number()
+            'workout_id'=>$this->faker->randomDigit()
             
         ];
     }

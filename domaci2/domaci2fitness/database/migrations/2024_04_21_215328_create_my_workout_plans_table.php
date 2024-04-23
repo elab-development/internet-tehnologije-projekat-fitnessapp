@@ -15,10 +15,10 @@ class CreateMyWorkoutPlansTable extends Migration
     {
         Schema::create('my_workout_plans', function (Blueprint $table) {
             $table->id();
-            $table->integer('member_id');
-            $table->integer('trainer_id');
-            $table->integer('workout_id');
-            $table->integer('gym_id');
+            $table->unsignedBigInteger('member_id');
+            $table->unsignedBigInteger('trainer_id');
+            $table->unsignedBigInteger('workout_id');
+            $table->unsignedBigInteger('gym_id');
             $table->date('date');
             $table->time('time');
             $table->timestamps();

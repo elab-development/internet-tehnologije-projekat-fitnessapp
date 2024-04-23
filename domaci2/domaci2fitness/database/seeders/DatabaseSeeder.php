@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'title'=>'Cardio workout',
             'duration'=>60,
             'description'=>'Cardiovascular exercise is any vigorous activity that increases heart rate and respiration and raises oxygen and blood flow throughout the 
-            body while using large muscle groups of the body repetitively and rhythmically.',
+            body ',
             'calorie_burn'=>450,
             'price'=>1500
         ]);
@@ -67,8 +67,7 @@ class DatabaseSeeder extends Seeder
             'title'=>'Yoga',
             'duration'=>60,
             'description'=>'Yoga is a group of physical, mental, and spiritual practices or 
-            disciplines which originated in ancient India and aim to control and still the mind,
-             recognizing a detached witness-consciousness untouched by the mind and mundane suffering.',
+            disciplines which originated in ancient India and aim to control and still the mind.',
             'calorie_burn'=>50,
             'price'=>2900
         ]);

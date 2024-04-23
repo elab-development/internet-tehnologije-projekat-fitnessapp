@@ -14,9 +14,10 @@ class TrainerFactory extends Factory
     public function definition()
     {
         return [
+            
             'name'=>$this->faker->name(),
             'email'=>$this->faker->unique()->safeEmail(),
-            'licence_number'=>$this->faker->unique()->randomNumber()
+            'licence_number'=>$this->faker->unique()->randomDigit()
         ];
     }
 }

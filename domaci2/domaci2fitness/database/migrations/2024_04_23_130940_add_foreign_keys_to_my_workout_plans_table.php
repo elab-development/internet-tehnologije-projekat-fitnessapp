@@ -13,12 +13,14 @@ class AddForeignKeysToMyWorkoutPlansTable extends Migration
      */
     public function up()
     {
-        Schema::table('MyWorkoutPlan', function (Blueprint $table) {
+      /* Schema::table('my_workout_plans', function (Blueprint $table) {
             $table->foreign('member_id')->references('id')->on('users');
-            $table->foreign('wokrout_id')->references('id')->on('workouts');
             $table->foreign('trainer_id')->references('id')->on('trainers');
+            $table->foreign('workout_id')->references('id')->on('workouts');
+            
             $table->foreign('gyms_id')->references('id')->on('gyms');
-        });
+           
+        });*/
     }
 
     /**
@@ -28,7 +30,7 @@ class AddForeignKeysToMyWorkoutPlansTable extends Migration
      */
     public function down()
     {
-        Schema::table('MyWorkoutPlan', function (Blueprint $table) {
+        Schema::table('my_workout_plans', function (Blueprint $table) {
             $table->dropForeign(['member_id']);
             $table->dropForeign(['workout_id']);
             $table->dropForeign(['trainer_id']);
