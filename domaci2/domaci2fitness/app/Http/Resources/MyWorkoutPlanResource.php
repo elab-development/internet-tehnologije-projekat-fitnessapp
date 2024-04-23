@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WorkoutResource extends JsonResource
+class MyWorkoutPlanResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -12,17 +12,16 @@ class WorkoutResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    
     public function toArray($request)
     {
         return [
             'id'=>$this->resource->id,
-            'duration'=>$this->resource->duration,
-            'description'=>$this->resource->description,
-            'calorie_counter'=>$this->resource->calorie_counter,
-            'title'=>$this->resource->title,
-            'price'=>$this->resource->price
-            
+            'date'=>$this->resource->date,
+            'time'=>$this->resource->time,
+            'member'=>new UserResource($this->member),
+            'trainer'=>new TrainerResource($this->trainer),
+            'gym'=>new GymResource($this->gym),
+            'workout'=> new WorkoutResource($this->workout),
            
         ];
     }

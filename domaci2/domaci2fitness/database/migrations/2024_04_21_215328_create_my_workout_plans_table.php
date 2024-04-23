@@ -15,10 +15,12 @@ class CreateMyWorkoutPlansTable extends Migration
     {
         Schema::create('my_workout_plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('trainer_id');
-            $table->foreignId('workout_id');
-            $table->datetime('date');
+            $table->integer('member_id');
+            $table->integer('trainer_id');
+            $table->integer('workout_id');
+            $table->integer('gym_id');
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
         });
     }

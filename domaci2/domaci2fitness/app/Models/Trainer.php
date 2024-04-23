@@ -10,6 +10,6 @@ class Trainer extends Model
     use HasFactory;
     protected $fillable=['name','email','licence_number'];
     public function workouts(){
-        return $this->hasMany(Workout::class);
+        return $this->hasMany(MyWorkoutPlan::class);
     }
 }

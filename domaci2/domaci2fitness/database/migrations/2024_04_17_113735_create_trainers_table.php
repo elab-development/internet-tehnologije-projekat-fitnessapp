@@ -14,11 +14,12 @@ class CreateTrainersTable extends Migration
     public function up()
     {
         Schema::create('trainers', function (Blueprint $table) {
-            $table->id();
+            $table->id('trainer_id');
             $table->string('name');
             $table->integer('licence_number');
             $table->string('email');
             $table->timestamps();
+            $table->foreign('trainee_id')->references('id')->on('users');
         });
     }
 

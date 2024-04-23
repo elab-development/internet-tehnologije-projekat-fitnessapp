@@ -43,6 +43,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function myWorkoutPlans(){
-        return $this->hasMany(MyWorkoutPlan::class,'trainer_id');
+        return $this->hasMany(MyWorkoutPlan::class,'member_id');
     }
 }

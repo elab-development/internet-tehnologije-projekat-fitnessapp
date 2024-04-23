@@ -14,7 +14,11 @@ class GymFactory extends Factory
     public function definition()
     {
         return [
-           //
+            'name' => $this->faker->string(),
+            'street' => $this->faker->string(),
+            'street_number' => $this->faker->number(),
+            'city' => $this->faker->string()
+            
         ];
     }
 }

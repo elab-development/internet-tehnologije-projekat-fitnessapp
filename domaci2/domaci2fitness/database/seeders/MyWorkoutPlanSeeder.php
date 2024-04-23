@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MyWorkoutPlanSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class MyWorkoutPlanSeeder extends Seeder
      */
     public function run()
     {
-        //
+       //
     }
 }
