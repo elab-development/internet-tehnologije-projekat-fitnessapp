@@ -19,7 +19,7 @@ class WorkoutResource extends JsonResource
             'id'=>$this->resource->id,
             'duration'=>$this->resource->duration,
             'description'=>$this->resource->description,
-            'calorie_counter'=>$this->resource->calorie_counter,
+            'calorie_burn'=>$this->resource->calorie_burn,
             'title'=>$this->resource->title,
             'price'=>$this->resource->price
             

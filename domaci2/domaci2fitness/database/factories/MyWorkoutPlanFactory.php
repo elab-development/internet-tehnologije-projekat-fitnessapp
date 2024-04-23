@@ -15,11 +15,11 @@ class MyWorkoutPlanFactory extends Factory
     {
         return [
             'member_id' => $this->faker->randomDigit(),
-            'trainer_id' => $this->faker->randomDigit(),
-            'gym_id' => $this->faker->randomDigit(),
+            'trainer_id' => $this->faker->numberBetween(1,5),
+            'gym_id' => $this->faker->numberBetween(1,3),
             'date' => $this->faker->date(),
             'time'=>$this->faker->time(),
-            'workout_id'=>$this->faker->randomDigit()
+            'workout_id'=>$this->faker->numberBetween(1,6)
             
         ];
     }

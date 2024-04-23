@@ -14,7 +14,6 @@ class GymFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>$this->faker->randomDigit(),
             'name' => $this->faker->string(),
             'street' => $this->faker->string(),
             'street_number' => $this->faker->randomDigit(),

@@ -43,7 +43,7 @@ class WorkoutController extends Controller
             'description'=>'required|string|max:255',
             'price'=>'required|numeric',
             'title'=>'required|string',
-            'calorie_counter'=>'required|numeric'
+            'calorie_burn'=>'required|numeric'
         ]);
         if($validation->fails()){
             return response()->json($validation->errors());
@@ -94,7 +94,7 @@ class WorkoutController extends Controller
             'description'=>'required|string|max:255',
             'price'=>'required|numeric',
             'title'=>'required|string',
-            'calorie_counter'=>'required|numeric'
+            'calorie_burn'=>'required|numeric'
            
         ]);
         if($validation->fails()){
@@ -104,7 +104,7 @@ class WorkoutController extends Controller
         $workout->description=$request->description;
         $workout->price=$request->price;
         $workout->title=$request->title;
-        $workout->calorie_counter=$request->calorie_counter;
+        $workout->calorie_burn=$request->calorie_burn;
         $workout->save();
         return response()->json('Workout is updated successfully.',200);
     }
@@ -128,7 +128,7 @@ class WorkoutController extends Controller
             'description'=>'required|string|max:255',
             'price'=>'required|numeric',
             'title'=>'required|string',
-            'calorie_counter'=>'required|numeric'
+            'calorie_burn'=>'required|numeric'
         ]);
 
         if ($validator->fails()) {
@@ -154,8 +154,8 @@ class WorkoutController extends Controller
         if ($request->has('title')) {
             $query->where('title', 'like', '%' . $request->input('title') . '%');
         }
-        if ($request->has('calorie_counter')) {
-            $query->where('calorie_counter', $request->input('calorie_counter'));
+        if ($request->has('calorie_burn')) {
+            $query->where('calorie_burn', $request->input('calorie_counter'));
         }
 
         

@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\GymController;
+use App\Http\Controllers\MyWokroutPlanController;
 use App\Http\Controllers\TrainerController;
-use App\Http\Controllers\TrainerWorkoutController;
+
+use App\Http\Controllers\TrainerWorkoutPlanController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserWorkoutController;
+use App\Http\Controllers\UserMyWorkoutPlanController;
+
 use App\Http\Controllers\WorkoutController;
+use App\Models\MyWorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,21 +28,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::resource('trainer',TrainerController::class)->only(['index']);
+Route::resource('gym',GymController::class)->only(['index']);
 Route::resource('workout',WorkoutController::class)->only(['index']);
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-
-
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profile', function(Request $request) {
-        return auth()->user();
-    });
-    Route::resource('trainers',TrainerController::class);
-    Route::resource('workouts',WorkoutController::class);
+//bez obzira na ulogu u sistemu svi mogu da izvrse logout
+Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('/logout',[AuthController::class,'logout']);
-    Route::get('user/{id}/workout',[UserWorkoutController::class,'index']);
-    Route::get('/users',[UserController::class,'index']);
-    Route::get('/users/{id}',[UserController::class,'show']);
-    Route::get('trainer/{id}/workout',[TrainerWorkoutController::class,'index']);
+});
+Route::group(['middleware' => ['auth:sanctum','role:member']], function () {
+    
+    Route::resource('workouts',MyWokroutPlanController::class);
+    Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
+    Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
+   
+});
+Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
+    
+    Route::resource('trainers',MyWokroutPlanController::class);
+    Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
+    Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
    
 });
