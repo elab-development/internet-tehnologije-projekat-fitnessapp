@@ -7,11 +7,27 @@ function Pagination({totalWorkouts,workoutsPerPage,setCurrentPage}) {
         pages.push(i);
     }
   return (
-    <div className='pagination'>
-        {pages.map((page,index)=>{
+    
+    <nav aria-label="Page navigation">
+    <ul className="pagination">
+      <li className="page-item">
+        <a className="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">«</span>
+        </a>
+      </li>
+      <li className="page-item position-absolute top-100 start-50 translate-middle "><a className="page-link" href="#">
+      {pages.map((page,index)=>{
             return <button  key={index} onClick={()=>setCurrentPage(page)}>{page} </button>
         })}
-    </div>
+        </a></li>
+      
+      <li className="page-item">
+        <a className="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">»</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
   )
 }
 

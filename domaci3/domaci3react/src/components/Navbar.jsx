@@ -2,8 +2,9 @@ import React from 'react'
 import { IoGitNetworkOutline } from "react-icons/io5";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import { Outlet } from 'react-router-dom';
 
-function Navbar({calorieCounter}) {
+function Navbar({calorieCounter,token}) {
   
   function handleLogout(){
     let config = {
@@ -24,6 +25,7 @@ function Navbar({calorieCounter}) {
       });
   }
   return (
+    <div>
       <nav className="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
     <div className="container-fluid">
       <a className="navbar-brand" href="#">Fitness Portal</a>
@@ -36,7 +38,7 @@ function Navbar({calorieCounter}) {
             <a className="nav-link " aria-current="page" href="#">Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link " href="#">Workouts</a>
+            <a className="nav-link " href="/workouts">Workouts</a>
           </li>
           <li className="nav-item">
             <a className="nav-link " href="#">Trainers</a>
@@ -51,11 +53,11 @@ function Navbar({calorieCounter}) {
         <form className="d-flex">
           <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
           <button className="btn btn-outline-light" type="submit">Search</button>
-          {window.sessionStorage.getItem("auth_token")==null ? (
-          <button className="btn btn-outline-light " type="submit" style={{marginLeft:5}}>Login</button>
+          {token==null ? (
+          <Link to='/login'><button className="btn btn-outline-light "  type="submit" style={{marginLeft:5}}>Login</button></Link>
           ):(
-          <button className="btn btn-outline-light " type="button" 
-          style={{marginLeft:5}} onClick={handleLogout}>Logout</button>
+          <Link to='/'><button className="btn btn-outline-light " type="button" 
+          style={{marginLeft:5}} onClick={handleLogout}>Logout</button></Link>
           )}
         </form>
         
@@ -63,6 +65,8 @@ function Navbar({calorieCounter}) {
     </div>
     
   </nav>
+  <Outlet/>
+  </div>
       
 
     
