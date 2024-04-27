@@ -2,30 +2,28 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-function LoginPage({addToken}) {
-    const [userData,setUserData]=useState({
-        "email":"",
-        "password":""
-    });
-    let navigate=useNavigate();
-    function handleInput(e){
-        let newUser=userData;
-        newUser[e.target.name]=e.target.value;
-        //console.log(newUser);
-        setUserData(newUser);
-    }
-    function handleLogin(e){
-        e.preventDefault();
-        axios.post("api/login",userData).then((res)=>{
-            console.log(res.data);
-            if(res.data.success===true){
-              window.sessionStorage.setItem("auth_token",res.data.auth_token);
-              addToken(res.data.auth_token);
-              navigate("/");
-            }
-        }).catch((err)=>{
-            console.log(err);
-        });
+function LoginPage({setToken}) {
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+   const navigate=useNavigate();
+   const handleLogin=async(e)=>{
+      e.preventDefault();
+      try {
+        const response = await axios.post('api/login', {email,password});
+        localStorage.setItem('token', response.data.token);
+        setToken(response.data.token);
+        localStorage.setItem('role', response.data.user.role);
+        console.log(response.data.user);
+        const role = response.data.user.role;
+        if (role == 'admin') {
+          navigate('/');
+          } else{
+          navigate('/');
+        }
+        }catch(error){
+          console.error('Error');
+        }
+        
     }
   return (
         <section className="h-100 gradient-form" style={{backgroundColor: "white"}}>
@@ -48,14 +46,14 @@ function LoginPage({addToken}) {
 
                   <div data-mdb-input-init className="form-outline mb-4">
                     <input type="email" id="form2Example11" 
-                    className="form-control" name="email"
-                      placeholder="Email address" onInput={handleInput} />
+                    className="form-control" value={email}
+                      placeholder="Email address" onChange={(e)=>setEmail(e.target.value)} required/>
                     <label className="form-label" htmlFor="form2Example11">Email</label>
                   </div>
 
                   <div data-mdb-input-init className="form-outline mb-4">
-                    <input type="password" id="form2Example22" name="password"
-                     className="form-control" onInput={handleInput} />
+                    <input type="password" id="form2Example22" value={password}
+                     className="form-control" onChange={(e)=>setPassword(e.target.value)} required />
                     <label className="form-label" htmlFor="form2Example22">Password</label>
                   </div>
 

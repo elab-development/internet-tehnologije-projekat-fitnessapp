@@ -3,27 +3,22 @@ import { useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function RegisterPage() {
-    const [userData,setUserData]=useState({
-        "name":"",
-        "email":"",
-        "password":""
-    });
-    let navigate=useNavigate();
-    function handleInput(e){
-        let newUser=userData;
-        newUser[e.target.name]=e.target.value;
-        //console.log(newUser);
-        setUserData(newUser);
-    }
-    function handleRegister(e){
-        e.preventDefault();
-        axios.post("api/register",userData).then((res)=>{
-            console.log(res.data);
-            navigate("/login");
-        }).catch((err)=>{
-            console.log(err);
-        });
-    }
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+    
+    const navigate=useNavigate();
+    const handleRegister=async(event)=>{
+      event.preventDefault();
+      try{
+        const response=await axios.post("api/register",{name,email,password});
+        console.log(response.data);
+        navigate('/login');
+      }catch(error){
+          console.error('Registration error');
+          alert(error);
+      }
+    };
   return (
     <section className="h-100 gradient-form" style={{backgroundColor: "white"}}>
     <div className="container py-5 h-100">
@@ -40,35 +35,38 @@ function RegisterPage() {
                     <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
                   </div>
   
-                  <form onSubmit={handleRegister}>
-                    
+                 
+                    <form onSubmit={handleRegister}>
 
                     <div data-mdb-input-init className="form-outline mb-4">
-                      <input type="name" id="form2Example11" 
-                      className="form-control" name="name"
-                        placeholder="Username" onInput={handleInput} />
+                      <input type="text" id="form2Example11" 
+                      className="form-control" 
+                        placeholder="Username" value={name}
+                        onChange={(e)=>setName(e.target.value)} required/>
                       <label className="form-label" htmlFor="form2Example11">Username</label>
                     </div>
   
                     <div data-mdb-input-init className="form-outline mb-4">
                       <input type="email" id="form2Example11" 
-                      className="form-control" name="email"
-                        placeholder="Email address" onInput={handleInput} />
+                      className="form-control"  value={email}
+                        placeholder="Email address" onChange={(e)=>setEmail(e.target.value)} required/>
                       <label className="form-label" htmlFor="form2Example11">Email</label>
                     </div>
   
                     <div data-mdb-input-init className="form-outline mb-4">
-                      <input type="password" id="form2Example22" name="password"
-                       className="form-control" onInput={handleInput} />
+                      <input type="password" id="form2Example22" value={password} placeholder='Password'
+                       className="form-control"  onChange={(e)=>setPassword(e.target.value)} required/>
                       <label className="form-label" htmlFor="form2Example22">Password</label>
                     </div>
+
+                   
   
                     <div className="text-center pt-1 mb-5 pb-1">
                       <button data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" 
                       type="submit">Register</button>
                     </div>
   
-                  </form>
+                    </form>
   
                 </div>
               </div>
