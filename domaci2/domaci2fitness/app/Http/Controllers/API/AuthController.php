@@ -15,7 +15,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $validator=Validator::make($request->all(),[
             'name' => 'required|string|max:100',
-            'email' => 'required|string|unique:users|email',
+            'email' => 'required|string|unique:users,email',
             'password' => 'required|string|regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"'
             //pass mora da sadrzi bar jedno malo slovo, jedno veliko slovo, broj i specijalni znak!!!
         ]);
@@ -29,21 +29,19 @@ class AuthController extends Controller
         'email' => $request->email,
         'password' => Hash::make($request->password),
         ]);
-        if ($request->has('role')) {
-            $user['role'] = $request->role;
-        }
+        
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['data'=>$user,'access_token'=>$token,'token_type'=>'Bearer']);
     }
     public function login(Request $request){
         if(!Auth::attempt($request->only('email', 'password'))){
-            return response()->json(['success'=>false], 401);
+            return response()->json(['message'=>'Invalid parameters'], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json([ 'success'=>true, 'auth_token' => $token,'token_type'=>'Bearer'], 200);
+        return response()->json([ 'message'=>'Login succesfull', 'token' => $token,'token_type'=>'Bearer','user'=>$user], 200);
     }
     public function logout(Request $request)
     {

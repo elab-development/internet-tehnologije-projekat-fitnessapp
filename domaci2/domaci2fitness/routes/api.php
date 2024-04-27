@@ -6,11 +6,11 @@ use App\Http\Controllers\MyWokroutPlanController;
 use App\Http\Controllers\TrainerController;
 
 use App\Http\Controllers\TrainerWorkoutPlanController;
-use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\UserMyWorkoutPlanController;
 
 use App\Http\Controllers\WorkoutController;
-use App\Models\MyWorkoutPlan;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
