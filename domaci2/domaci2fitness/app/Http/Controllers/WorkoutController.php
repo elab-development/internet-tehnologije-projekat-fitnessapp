@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WorkoutStoreRequest;
 use App\Http\Resources\WorkoutCollection;
 use App\Http\Resources\WorkoutResource;
 use App\Models\Workout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class WorkoutController extends Controller
 {
@@ -36,26 +39,27 @@ class WorkoutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WorkoutStoreRequest $request)
     {
-        $validation=Validator::make($request->all(),[
-            'duration'=>'required|max:255',
-            'description'=>'required|string|max:255',
-            'price'=>'required|numeric',
-            'title'=>'required|string',
-            'calorie_burn'=>'required|numeric'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
-        }
-        $workout=Workout::create([
+       try{
+        $imageName=Str::random(6).".".$request->image->getClientOriginalExtension();
+        Workout::create([
             'duration'=>$request->duration,
             'description'=>$request->description,
             'price'=>$request->price,
             'title'=>$request->title,
-            'calorie_counter'=>$request->calorie_counter
+            'calorie_burn'=>$request->calorie_burn,
+            'image'=>$request->image,
         ]);
-            return response()->json($workout);
+        Storage::disk('public')->put($imageName,file_get_contents($request->image));
+        return response()->json([
+            'message'=>'Workout succesfully created'
+        ],200);
+       }catch(\Exception $e){
+            return response()->json([
+                'message'=>'Something went wrong'
+            ],500);
+       }
     }
 
     /**
@@ -64,8 +68,14 @@ class WorkoutController extends Controller
      * @param  \App\Models\Workout  $workout
      * @return \Illuminate\Http\Response
      */
-    public function show(Workout $workout)
+    public function show($id)
     {
+        $workout=Workout::find($id);
+        if(!$workout){
+            return response()->json([
+                'message'=>'Workout not found'
+            ],404);
+        }
         return new WorkoutCollection($workout);
     }
 
@@ -87,26 +97,44 @@ class WorkoutController extends Controller
      * @param  \App\Models\Workout  $workout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Workout $workout)
+    public function update(WorkoutStoreRequest $request,$id)
     {
-        $validation=Validator::make($request->all(),[
-            'duration'=>'required|max:255',
-            'description'=>'required|string|max:255',
-            'price'=>'required|numeric',
-            'title'=>'required|string',
-            'calorie_burn'=>'required|numeric'
-           
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
+       try{
+        $workout=Workout::find($id);
+        if(!$workout){
+            return response()->json([
+                'message'=>'Workout not found'
+            ],404);
         }
-        $workout->duration=$request->duration;
-        $workout->description=$request->description;
-        $workout->price=$request->price;
-        $workout->title=$request->title;
-        $workout->calorie_burn=$request->calorie_burn;
-        $workout->save();
-        return response()->json('Workout is updated successfully.',200);
+            echo "request:$request->title";
+            echo "request:$request->duration";
+            echo "request:$request->description";
+            echo "request:$request->calorie_burn";
+            echo "request:$request->price";
+            $workout->title=$request->title;
+            $workout->duration=$request->duration;
+            $workout->description=$request->description;
+            $workout->calorie_burn=$request->calorie_burn;
+            $workout->price=$request->price;
+            if($request->image){
+                $storage=Storage::disk('public');
+                if($storage->exists($workout->image)){
+                    $storage->delete($workout->image);
+                }
+                $imageName=Str::random(6).".".$request->image->getClientOriginalExtension();
+                $workout->image=$imageName;
+                $storage->put($imageName,file_get_contents($request->image));
+            }
+            $workout->save();
+           
+            return response()->json([
+                'message'=>'Workout succesfully updated'
+            ],200);
+       }catch(\Exception $e){
+        return response()->json([
+            'message'=>'Something went wrong'
+        ],500);
+       }
     }
 
     /**

@@ -18,6 +18,7 @@ class CreateWorkoutsTable extends Migration
             $table->integer('duration');
             $table->string('description');
             $table->decimal('price',10,2);
+            $table->string('image');
             $table->timestamps();
         });
     }

@@ -24,27 +24,34 @@ class DatabaseSeeder extends Seeder
         Workout::truncate();
         
         //1 admin
-        User::factory(1)->create(['role' => 'admin']);
+        User::create([
+            'name'=>'Jeja',
+            'email'=>'admin@gmail.com',
+            'password'=>'Jelena18*',
+            'role'=>'admin'
+        ]);
         //10 neulogovanih korisnika
         User::factory(10)->create(['role' => 'user']);
         //10 ulogovanih korisnika
         User::factory(10)->create(['role' => 'member']);
         
         Workout::create([
-            'title'=>'Cardio workout',
+            'title'=>'Cardio',
             'duration'=>60,
             'description'=>'Cardiovascular exercise is any vigorous activity that increases heart rate and respiration and raises oxygen and blood flow throughout the 
             body ',
             'calorie_burn'=>450,
-            'price'=>1500
+            'price'=>1500,
+            'image'=>'cardio.png'
         ]);
         Workout::create([
-            'title'=>'Strength workout',
+            'title'=>'Strength',
             'duration'=>30,
             'description'=>'Strength training, also known as weight training, involves the performace 
             of physical exercises that are designed to improve strength and edurance.',
             'calorie_burn'=>500,
-            'price'=>2000
+            'price'=>2000,
+            'image'=>'strength.png'
         ]);
         Workout::create([
             'title'=>'Pilates',
@@ -52,7 +59,8 @@ class DatabaseSeeder extends Seeder
             'description'=>'A system of exercises using special aparatus, designed to improve physical 
             strength, flexibility and posture.',
             'calorie_burn'=>300,
-            'price'=>2500
+            'price'=>2500,
+            'image'=>'pilates.png'
         ]);
         Workout::create([
             'title'=>'Stretching',
@@ -61,7 +69,8 @@ class DatabaseSeeder extends Seeder
             specific muscle or tendon is deliberately expanded and flexed 
             in order to improve the muscles felt elasticity and achieve comfortable muscle tone.',
             'calorie_burn'=>50,
-            'price'=>500
+            'price'=>500,
+            'image'=>'stretching.png'
         ]);
         Workout::create([
             'title'=>'Yoga',
@@ -69,7 +78,8 @@ class DatabaseSeeder extends Seeder
             'description'=>'Yoga is a group of physical, mental, and spiritual practices or 
             disciplines which originated in ancient India and aim to control and still the mind.',
             'calorie_burn'=>50,
-            'price'=>2900
+            'price'=>2900,
+            'image'=>'yoga.png'
         ]);
         Workout::create([
             'title'=>'HIIT',
@@ -77,7 +87,8 @@ class DatabaseSeeder extends Seeder
             'description'=>'HIIT exercises involve short bursts of intense movements followed
              by brief periods of rest or low-intensity activity.',
             'calorie_burn'=>500,
-            'price'=>3000
+            'price'=>3000,
+            'image'=>'hiit.png'
         ]);
     
         

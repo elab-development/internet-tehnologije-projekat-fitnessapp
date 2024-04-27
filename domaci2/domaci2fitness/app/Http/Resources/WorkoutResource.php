@@ -21,7 +21,8 @@ class WorkoutResource extends JsonResource
             'description'=>$this->resource->description,
             'calorie_burn'=>$this->resource->calorie_burn,
             'title'=>$this->resource->title,
-            'price'=>$this->resource->price
+            'price'=>$this->resource->price,
+            'image'=>$this->resource->image
             
            
         ];

@@ -37,11 +37,13 @@ Route::post('/login',[AuthController::class,'login']);
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('/logout',[AuthController::class,'logout']);
 });
-Route::group(['middleware' => ['auth:sanctum','role:member']], function () {
+Route::middleware (['auth:sanctum','role:member'])->group( function () {
     
-    Route::resource('workouts',MyWokroutPlanController::class);
+    Route::resource('myWorkouts',MyWokroutPlanController::class);
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
+    Route::resource('workouts', WorkoutController::class);//ovo samo za testiranje
+    
    
 });
 Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
@@ -49,5 +51,6 @@ Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
     Route::resource('trainers',MyWokroutPlanController::class);
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
+    
    
 });
