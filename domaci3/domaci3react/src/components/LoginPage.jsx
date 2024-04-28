@@ -11,10 +11,10 @@ function LoginPage({setToken}) {
       e.preventDefault();
       try {
         const response = await axios.post('api/login', {email,password});
-        sessionStorage.setItem('authToken', response.data.token);
+        sessionStorage.setItem("token", response.data.token)
         setToken(response.data.token);
         sessionStorage.setItem('role', response.data.user.role);
-        console.log(response.data.token);
+        console.log(response.data.user);
         const role = response.data.user.role;
         if (role == 'admin') {
           navigate('/');
