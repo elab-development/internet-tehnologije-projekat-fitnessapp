@@ -30,8 +30,8 @@ class AuthController extends Controller
         'password' => Hash::make($request->password),
         ]);
         
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json(['data'=>$user,'access_token'=>$token,'token_type'=>'Bearer']);
+        $token = $user->createToken('authToken')->plainTextToken;
+        return response()->json(['data'=>$user,'token'=>$token,'token_type'=>'Bearer']);
     }
     public function login(Request $request){
         if(!Auth::attempt($request->only('email', 'password'))){
@@ -39,9 +39,9 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('authToken')->plainTextToken;
 
-        return response()->json([ 'message'=>'Login succesfull', 'token' => $token,'token_type'=>'Bearer','user'=>$user], 200);
+        return response()->json([ 'message'=>'Login succesfull', 'token' => $token,'user'=>$user], 200);
     }
     public function logout(Request $request)
     {

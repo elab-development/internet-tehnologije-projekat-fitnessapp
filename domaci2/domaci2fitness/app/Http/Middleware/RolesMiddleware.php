@@ -17,17 +17,20 @@ class RolesMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (!Auth::check()) {
-            //obican korisnik
-            return response('Unauthorized.', 401);
+        $user = $request->user();
+
+        if (!$user) {   
+         
+            return abort(403, 'Unauthorized');
         }
 
-        $user = Auth::user();
-        if(in_array($user->role, $roles)) {
-            return $next($request);
+        foreach ($roles as $role) {
+            if ($user->role === $role) {
+             
+                return $next($request);
+            }
         }
 
-        
-        return response('Forbidden.', 403);
+        return abort(403, 'Unauthorized');
     }
 }

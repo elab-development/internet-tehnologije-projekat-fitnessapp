@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Workout;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,42 +26,52 @@ class DatabaseSeeder extends Seeder
         
         //1 admin
         User::create([
-            'name'=>'Jeja',
-            'email'=>'admin@gmail.com',
-            'password'=>'Jelena18*',
-            'role'=>'admin'
+            'name' => 'Jelena',
+            'email' => 'member1@gmail.com',
+            'password' => Hash::make('Jelena18*'),  
+            'role' => 'member',
         ]);
-        //10 neulogovanih korisnika
-        User::factory(10)->create(['role' => 'user']);
-        //10 ulogovanih korisnika
-        User::factory(10)->create(['role' => 'member']);
+
+        User::create([
+            'name' => 'Jeja',
+            'email' => 'member2@gmail.com',
+            'password' => Hash::make('Jelena18*'),  
+            'role' => 'member',
+        ]);
+   
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin1@gmail.com',
+            'password' => Hash::make('Admin18*'),  
+            'role' => 'admin',
+        ]);
+        
+        
+        
         
         Workout::create([
             'title'=>'Cardio',
             'duration'=>60,
             'description'=>'Cardiovascular exercise is any vigorous activity that increases heart rate and respiration and raises oxygen and blood flow throughout the 
             body ',
-            'calorie_burn'=>450,
             'price'=>1500,
-            'image'=>'cardio.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\cardio.png',
         ]);
         Workout::create([
             'title'=>'Strength',
             'duration'=>30,
             'description'=>'Strength training, also known as weight training, involves the performace 
             of physical exercises that are designed to improve strength and edurance.',
-            'calorie_burn'=>500,
             'price'=>2000,
-            'image'=>'strength.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\strength.png'
         ]);
         Workout::create([
             'title'=>'Pilates',
             'duration'=>60,
             'description'=>'A system of exercises using special aparatus, designed to improve physical 
             strength, flexibility and posture.',
-            'calorie_burn'=>300,
             'price'=>2500,
-            'image'=>'pilates.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\pilates.png'
         ]);
         Workout::create([
             'title'=>'Stretching',
@@ -68,27 +79,24 @@ class DatabaseSeeder extends Seeder
             'description'=>'Stretching is a form of physical exercise in which a 
             specific muscle or tendon is deliberately expanded and flexed 
             in order to improve the muscles felt elasticity and achieve comfortable muscle tone.',
-            'calorie_burn'=>50,
             'price'=>500,
-            'image'=>'stretching.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\stretching.png'
         ]);
         Workout::create([
             'title'=>'Yoga',
             'duration'=>60,
             'description'=>'Yoga is a group of physical, mental, and spiritual practices or 
             disciplines which originated in ancient India and aim to control and still the mind.',
-            'calorie_burn'=>50,
             'price'=>2900,
-            'image'=>'yoga.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\yoga.png'
         ]);
         Workout::create([
             'title'=>'HIIT',
             'duration'=>30,
             'description'=>'HIIT exercises involve short bursts of intense movements followed
              by brief periods of rest or low-intensity activity.',
-            'calorie_burn'=>500,
             'price'=>3000,
-            'image'=>'hiit.png'
+            'image'=>'domaci2fitness\storage\app\public\workout\image\hiit.png'
         ]);
     
         

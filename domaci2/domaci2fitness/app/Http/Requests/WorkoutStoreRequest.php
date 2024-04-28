@@ -29,8 +29,8 @@ class WorkoutStoreRequest extends FormRequest
                 'description'=>'required|string|max:255',
                 'price'=>'required|numeric',
                 'title'=>'required|string',
-                'calorie_burn'=>'required|numeric',
-                'image'=>'required|image|mimes:jpg,png,jpeg,gif|max:2048'
+               
+                'image'=>'required|image|mimes:jpg,png,jpeg,gif'
             ];
         }else{
             return [
@@ -38,8 +38,8 @@ class WorkoutStoreRequest extends FormRequest
                 'description'=>'required|string|max:255',
                 'price'=>'required|numeric',
                 'title'=>'required|string',
-                'calorie_burn'=>'required|numeric',
-                'image'=>'nullable|image|mimes:jpg,png,jpeg,gif|max:2048'
+                
+                'image'=>'nullable|image|mimes:jpg,png,jpeg,gif'
             ];
         }
     }
@@ -51,7 +51,7 @@ class WorkoutStoreRequest extends FormRequest
                 'description.required'=>'Description is required',
                 'price.required'=>'Price is required',
                 'title.required'=>'Title is required',
-                'calorie_burn.required'=>'Calorie burn is required',
+                
                 'image.required'=>'Image is required'
             ];
         }else{
@@ -60,7 +60,7 @@ class WorkoutStoreRequest extends FormRequest
                 'description.required'=>'Description is required',
                 'price.required'=>'Price is required',
                 'title.required'=>'Title is required',
-                'calorie_burn.required'=>'Calorie burn is required',
+                
             ];
         }
     }

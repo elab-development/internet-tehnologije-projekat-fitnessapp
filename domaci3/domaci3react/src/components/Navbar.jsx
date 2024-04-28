@@ -38,25 +38,28 @@ function Navbar({token,setToken}) {
     <div className="collapse navbar-collapse show" id="navbarDark">
       <ul className="navbar-nav me-auto mb-2 mb-xl-0">
         <li className="nav-item">
-          <Link className="nav-link " aria-current="page" to="#">Home</Link>
+          <Link className="nav-link " aria-current="page" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link " to="/workouts">Wokrouts</Link>
+          <Link className="nav-link " to="/workouts">Workouts</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link " to="/trainers" >Trainers</Link>
         </li>
-        {token && role=='member' && (
+        {token && role==='member' && (
           <>
           <li className="nav-item">
             <Link className="nav-link " to="/myWorkoutPlan" >MyWorkoutPlan</Link>
           </li>
           </>
           )}
-           {token && role=='admin' && (
+           {token && role==='admin' && (
           <>
           <li className="nav-item">
-            <Link className="nav-link " to="/" >Statistics</Link>
+            <Link className="nav-link " to="/adminWorkouts" >CRUD Workouts</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link " to="/adminTrainers" >CRUD Trainers</Link>
           </li>
           </>
           )}

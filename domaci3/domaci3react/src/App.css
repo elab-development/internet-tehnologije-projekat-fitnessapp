@@ -1,20 +1,17 @@
 
-
-a {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+ul.pagination {
+  list-style: none;
+  display: flex; 
+  justify-content: center;  
+  align-items: center;  
+  margin: 0;
+  padding: 0;
 }
 
-.counter{
-  margin-left: 10px;
+ul.pagination > li {
+  padding: 15px;
 }
-.pagination {
 
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 1rem;
-}
 .pagination button {
   width: 40px;
   height: 40px;

@@ -33,6 +33,7 @@ Route::resource('gym',GymController::class)->only(['index']);
 Route::resource('workout',WorkoutController::class)->only(['index']);
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
+
 //bez obzira na ulogu u sistemu svi mogu da izvrse logout
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('/logout',[AuthController::class,'logout']);
@@ -42,7 +43,7 @@ Route::middleware (['auth:sanctum','role:member'])->group( function () {
     Route::resource('myWorkouts',MyWokroutPlanController::class);
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
-    Route::resource('workouts', WorkoutController::class);//ovo samo za testiranje
+    
     
    
 });
@@ -51,6 +52,10 @@ Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
     Route::resource('trainers',MyWokroutPlanController::class);
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
+    Route::resource('workouts', WorkoutController::class);
+    Route::delete('/workouts/{id}',[WorkoutController::class,'destroy']);
+    Route::put('/workoutsUpdate/{id}',[WorkoutController::class,'update']); 
+    Route::resource('trainers',[TrainerController::class]); 
     
    
 });

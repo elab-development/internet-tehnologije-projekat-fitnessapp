@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 function LoginPage({setToken}) {
    const [email, setEmail] = useState('');
@@ -10,10 +11,10 @@ function LoginPage({setToken}) {
       e.preventDefault();
       try {
         const response = await axios.post('api/login', {email,password});
-        localStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('authToken', response.data.token);
         setToken(response.data.token);
-        localStorage.setItem('role', response.data.user.role);
-        console.log(response.data.user);
+        sessionStorage.setItem('role', response.data.user.role);
+        console.log(response.data.token);
         const role = response.data.user.role;
         if (role == 'admin') {
           navigate('/');
@@ -65,7 +66,7 @@ function LoginPage({setToken}) {
 
                   <div className="d-flex align-items-center justify-content-center pb-4">
                     <p className="mb-0 me-2">Don't have an account?</p>
-                    <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-danger">Create new</button>
+                    <Link  className="btn btn-outline-danger " to='/register'>Create new</Link>
                   </div>
 
                 </form>
