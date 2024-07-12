@@ -18,7 +18,7 @@ class GymResource extends JsonResource
         'id'=>$this->resource->id,
         'name'=>$this->resource->name,
         'street'=>$this->resource->street,
-        'street_number'=>$this->resource->street_number,
+        'streetNumber'=>$this->resource->streetNumber,
         'city'=>$this->resource->city
         ];
     }

@@ -21,7 +21,7 @@ class MyWokroutPlanController extends Controller
         //prikaz samo rezervacija odredjenog ulogovanog korisnika
         $user = $request->user();
         $myWorkoutPlan = MyWorkoutPlan::where('member_id', $user->id)->get();
-        return new MyWorkoutPlanCollection($myWorkoutPlan);
+        return  MyWorkoutPlanResource::collection($myWorkoutPlan);
     }
     public function indexAdmin(Request $request)
     {
@@ -77,13 +77,19 @@ class MyWokroutPlanController extends Controller
                     },
                 ]
         ]);
-        if ($validation->fails()) {
-            return response()->json(['error' => $validation->errors()], 400);
-        }
+        try{
         $user=$request->user();
         $request->merge(['member_id' => $user->id]);
         $myWorkoutPlan = MyWorkoutPlan::create($request->all());
         return new MyWorkoutPlanResource($myWorkoutPlan);
+        return response()->json([
+            'message' => "Plan successfully created."
+        ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => "Something went really wrong!"
+            ],500);
+        }
     }
 
     /**

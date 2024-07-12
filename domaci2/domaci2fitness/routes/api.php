@@ -10,7 +10,7 @@ use App\Http\Controllers\TrainerWorkoutPlanController;
 use App\Http\Controllers\UserMyWorkoutPlanController;
 
 use App\Http\Controllers\WorkoutController;
-
+use App\Models\MyWorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,12 @@ Route::middleware(['auth:sanctum'])->group(function(){
 });
 Route::middleware (['auth:sanctum','role:member'])->group( function () {
     
-    Route::resource('myWorkouts',MyWokroutPlanController::class);
+    Route::get('/myWorkouts', [MyWokroutPlanController::class, 'indexMembers']);
+    Route::get('/myWorkouts/{id}', [MyWokroutPlanController::class, 'show']);
+    Route::post('/myWorkouts', [MyWokroutPlanController::class, 'store']);
+    Route::put('/myWorkouts/{id}', [MyWokroutPlanController::class, 'update']);
+    Route::delete('/myWorkouts/{id}', [MyWokroutPlanController::class, 'destroy']);
+
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
     
@@ -49,13 +54,20 @@ Route::middleware (['auth:sanctum','role:member'])->group( function () {
 });
 Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
     
-    Route::resource('trainers',MyWokroutPlanController::class);
+    Route::resource('trainers',TrainerController::class);
+    Route::put('/trainersUpdate/{id}',[TrainerController::class,'update']);
+    Route::delete('/trainers/{id}',[TrainerController::class,'destroy']);
     Route::get('user/{id}/workout',[UserMyWorkoutPlanController::class,'index']);
     Route::get('trainer/{id}/workout',[TrainerWorkoutPlanController::class,'index']);
     Route::resource('workouts', WorkoutController::class);
+    Route::get('workouts/{id}',[WorkoutController::class,'show']);
     Route::delete('/workouts/{id}',[WorkoutController::class,'destroy']);
     Route::put('/workoutsUpdate/{id}',[WorkoutController::class,'update']); 
-    Route::resource('trainers',[TrainerController::class]); 
+    Route::resource('gyms', GymController::class);
+    Route::delete('/gyms/{id}',[GymController::class,'destroy']);
+    Route::put('/gymsUpdate/{id}',[GymController::class,'update']); 
+    
+    
     
    
 });

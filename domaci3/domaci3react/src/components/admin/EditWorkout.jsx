@@ -8,8 +8,8 @@ function EditWorkout() {
     const {id}=   useParams();
     const[message, setMessage]= useState('');
     const [inputs, setInputs] = useState([]);
-    const [image, setImage]= useState('');
-    const token = localStorage.getItem('token');
+    const [fileImage, setImage]= useState('');
+    const token = sessionStorage.getItem('authToken');
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -23,8 +23,8 @@ function EditWorkout() {
         formData.append('description',inputs.description);
        
         formData.append('price',inputs.price);
-        formData.append('image', inputs.image);
-        const response= await axios.post("api/workouts/"+id, formData, {
+        formData.append('image', fileImage);
+        const response= await axios.post("api/workoutsUpdate/"+id, formData, {
             headers:{'Content-Type':"multipart/form-data",Authorization: `Bearer ${token}`},
         } );
         setMessage(response.data.message); 
@@ -40,13 +40,13 @@ function EditWorkout() {
      }
       
      useEffect(() => {
-        const token = sessionStorage.getItem('token');
+        
         const config = {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         };
-        axios.get('api/workout', config)
+        axios.get('api/workouts'+id, config)
         .then((response) => {
           setInputs(response.data.data);
         

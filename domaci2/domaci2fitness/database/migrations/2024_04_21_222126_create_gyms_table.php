@@ -17,7 +17,7 @@ class CreateGymsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('street');
-            $table->string('street_number');
+            $table->integer('streetNumber');
             $table->string('city');
             
             $table->timestamps();

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Trainer extends Model
 {
     use HasFactory;
-    protected $fillable=['name','email','licence_number'];
+    protected $fillable=['name','email','licenceNumber'];
     public function workouts(){
         return $this->hasMany(MyWorkoutPlan::class);
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState  } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Swal from 'sweetalert2';
+
 function AddTrainerAdmin({setToken}) {
     const [name,setName]=useState('');
     const [email,setEmail]=useState('');
@@ -50,19 +50,19 @@ function AddTrainerAdmin({setToken}) {
                 <p className="text-warning">{message}</p>
                 <form onSubmit={handleSubmit} >
                     <div className="mb-3 row ">
-                        <label className="col-sm-3">Title</label>
+                        <label className="col-sm-3">Name</label>
                         <div className="col-sm-5 txttitle">
                             <input type="text" className='form-control'  onChange={(e)=>setName(e.target.value)}/>
                         </div>
                     </div>
                     <div className="mb-3 row">
-                        <label className="col-sm-3">Duration</label>
+                        <label className="col-sm-3">Email</label>
                         <div className="col-sm-5">
                             <input type="email" className='form-control' onChange={(e)=>setEmail(e.target.value)}/>
                         </div>
                     </div>
                     <div className="mb-3 row">
-                        <label className="col-sm-3">Description</label>
+                        <label className="col-sm-3">Licence number</label>
                         <div className="col-sm-5">
                             <input type="text" className='form-control' onChange={(e)=>setLicenceNumber(e.target.value)}/>
                         </div>

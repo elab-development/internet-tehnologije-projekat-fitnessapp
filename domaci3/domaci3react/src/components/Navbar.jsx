@@ -9,7 +9,7 @@ function Navbar({token,setToken}) {
   const navigate=useNavigate();
   useEffect(() => {
       if (token) {
-          const userRole = localStorage.getItem('role');  
+          const userRole = sessionStorage.getItem('role');  
           setRole(userRole);  
      }
   }, [token]);
@@ -31,7 +31,7 @@ function Navbar({token,setToken}) {
   return (
     <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">My fitness portal</a>
+    <a className="navbar-brand" href="/home">My fitness portal</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -44,12 +44,15 @@ function Navbar({token,setToken}) {
           <Link className="nav-link " to="/workouts">Workouts</Link>
         </li>
         <li className="nav-item">
+          <Link className="nav-link " to="/gyms" >Gyms</Link>
+        </li>
+        <li className="nav-item">
           <Link className="nav-link " to="/trainers" >Trainers</Link>
         </li>
         {token && role==='member' && (
           <>
           <li className="nav-item">
-            <Link className="nav-link " to="/myWorkoutPlan" >MyWorkoutPlan</Link>
+            <Link className="nav-link " to="/myWorkouts" >MyWorkoutPlan</Link>
           </li>
           </>
           )}
@@ -60,6 +63,9 @@ function Navbar({token,setToken}) {
           </li>
           <li className="nav-item">
             <Link className="nav-link " to="/adminTrainers" >CRUD Trainers</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link " to="/adminGyms" >CRUD Gyms</Link>
           </li>
           </>
           )}

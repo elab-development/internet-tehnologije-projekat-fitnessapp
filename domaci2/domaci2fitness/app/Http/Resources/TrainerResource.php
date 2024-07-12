@@ -17,7 +17,7 @@ class TrainerResource extends JsonResource
         return [
             'id'=>$this->resource->id,
             'name'=>$this->resource->name,
-            'licence_number'=>$this->resource->licence_number,
+            'licenceNumber'=>$this->resource->licenceNumber,
             'email'=>$this->resource->email
         ];
     }

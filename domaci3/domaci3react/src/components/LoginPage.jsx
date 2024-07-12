@@ -11,7 +11,7 @@ function LoginPage({setToken}) {
       e.preventDefault();
       try {
         const response = await axios.post('api/login', {email,password});
-        sessionStorage.setItem("token", response.data.token)
+        sessionStorage.setItem('authToken', response.data.token)
         setToken(response.data.token);
         sessionStorage.setItem('role', response.data.user.role);
         console.log(response.data.user);

@@ -16,7 +16,7 @@ class CreateTrainersTable extends Migration
         Schema::create('trainers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('licence_number');
+            $table->integer('licenceNumber');
             $table->string('email');
             $table->timestamps();
             

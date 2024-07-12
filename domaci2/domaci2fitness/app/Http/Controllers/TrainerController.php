@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainerCollection;
+use App\Http\Resources\TrainerResource;
 use App\Models\Trainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,10 +18,7 @@ class TrainerController extends Controller
     public function index()
     {
         $trainer=Trainer::all();
-        if(is_null($trainer)){
-            return response()->json(['message'=>"Data not found",'status_code'=>404],404);
-        }
-        return new TrainerCollection($trainer);
+        return TrainerResource::collection($trainer);
     }
 
     /**
@@ -43,19 +41,33 @@ class TrainerController extends Controller
     {
         $validation=Validator::make($request->all(),[
             'name'=>'required|max:100|string',
-            'licence_number'=>'required|min:5',
+            'licenceNumber'=>'required|min:5',
             'email'=>'required|email|unique:trainers'
         ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
+       
+       
+        
+        try {
+            
+      
+           
+            $trainer=Trainer::create([
+                'name'=>$request->name,
+                'licenceNumber'=>$request->licenceNumber,
+                'email'=>$request->email
+    
+            ]);
+      
+            
+            return response()->json([
+                'message' => "Workout successfully created."
+            ],200);
+        } catch (\Exception $e) {
+            // Return Json Response
+            return response()->json([
+                'message' => "Something went really wrong!"
+            ],500);
         }
-        $trainer=Trainer::create([
-            'name'=>$request->name,
-            'licence_number'=>$request->licence_number,
-            'email'=>$request->email
-
-        ]);
-        return response()->json($trainer);
     }
 
     /**
@@ -91,17 +103,23 @@ class TrainerController extends Controller
     {
         $validation=Validator::make($request->all(),[
             'name'=>'required|string|max:20',
-            'licence_number'=>'required|max:20|numeric',
+            'licenceNumber'=>'required|max:20|numeric',
             'email'=>'required|email|unique:trainers'
         ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
-        }
+        try{
         $trainer->name=$request->name;
-        $trainer->licence_number=$request->licence_number;
+        $trainer->licenceNumber=$request->licenceNumber;
         $trainer->email=$request->email;
         $trainer->save();
-        return response()->json('Trainer is updated successfully.',200);
+        return response()->json([
+            'message'=>'Trainer succesfully updated'
+        ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message'=>'Something went wrong'
+            ],500);
+        }
+        
     }
 
     /**

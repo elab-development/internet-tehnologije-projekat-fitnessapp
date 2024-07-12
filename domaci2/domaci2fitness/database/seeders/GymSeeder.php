@@ -19,21 +19,21 @@ class GymSeeder extends Seeder
                 'name' => 'FitCentar',
                 'city'=>'Beograd',
                 'street'=>'Kralja Milana',
-                'street_number'=>20
+                'streetNumber'=>20
                
             ],
             [
                 'name'=>'Mojo',
                 'city'=>'Beograd',
                 'street'=>'Cara Dusana',
-                'street_number'=>150
+                'streetNumber'=>150
                 
             ],
             [
                 'name'=>'ProFitness',
                 'city'=>'Beograd',
                 'street'=>'Vojvode Stepe',
-                'street_number'=>14
+                'streetNumber'=>14
               
             ]
            

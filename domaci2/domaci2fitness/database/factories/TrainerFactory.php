@@ -17,7 +17,7 @@ class TrainerFactory extends Factory
             
             'name'=>$this->faker->name(),
             'email'=>$this->faker->unique()->safeEmail(),
-            'licence_number'=>$this->faker->unique()->randomDigit()
+            'licenceNumber'=>$this->faker->unique()->randomDigit()
         ];
     }
 }

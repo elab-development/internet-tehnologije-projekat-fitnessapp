@@ -45,6 +45,12 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Admin18*'),  
             'role' => 'admin',
         ]);
+        User::create([
+            'name' => 'trainer',
+            'email' => 'trainer1@gmail.com',
+            'password' => Hash::make('Trainer18*'),  
+            'role' => 'trainer',
+        ]);
         
         
         
@@ -55,7 +61,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'Cardiovascular exercise is any vigorous activity that increases heart rate and respiration and raises oxygen and blood flow throughout the 
             body ',
             'price'=>1500,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\cardio.png',
+            'image'=>'cardio.png',
         ]);
         Workout::create([
             'title'=>'Strength',
@@ -63,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'Strength training, also known as weight training, involves the performace 
             of physical exercises that are designed to improve strength and edurance.',
             'price'=>2000,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\strength.png'
+            'image'=>'strength.png'
         ]);
         Workout::create([
             'title'=>'Pilates',
@@ -71,7 +77,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'A system of exercises using special aparatus, designed to improve physical 
             strength, flexibility and posture.',
             'price'=>2500,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\pilates.png'
+            'image'=>'pilates.png'
         ]);
         Workout::create([
             'title'=>'Stretching',
@@ -80,7 +86,7 @@ class DatabaseSeeder extends Seeder
             specific muscle or tendon is deliberately expanded and flexed 
             in order to improve the muscles felt elasticity and achieve comfortable muscle tone.',
             'price'=>500,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\stretching.png'
+            'image'=>'stretching.png'
         ]);
         Workout::create([
             'title'=>'Yoga',
@@ -88,7 +94,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'Yoga is a group of physical, mental, and spiritual practices or 
             disciplines which originated in ancient India and aim to control and still the mind.',
             'price'=>2900,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\yoga.png'
+            'image'=>'yoga.png'
         ]);
         Workout::create([
             'title'=>'HIIT',
@@ -96,7 +102,7 @@ class DatabaseSeeder extends Seeder
             'description'=>'HIIT exercises involve short bursts of intense movements followed
              by brief periods of rest or low-intensity activity.',
             'price'=>3000,
-            'image'=>'domaci2fitness\storage\app\public\workout\image\hiit.png'
+            'image'=>'hiit.png'
         ]);
     
         

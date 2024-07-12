@@ -8,7 +8,7 @@ function OneWorkout({workouts}) {
     <div className="card">
   <div className="row g-0">
     <div className="col-5 col-sm-4">
-    <img src="http://127.0.0.1:8000/storage/${workouts.image}" className="img-fluid w-50" alt="card-horizontal-image"/>
+    <img src={`http://127.0.0.1:8000/storage/${workouts.image}`} className="img-thumbnail"  alt="" />
     </div>
     <div className="col-7 col-sm-8">
       <div className="card-body">
@@ -16,7 +16,8 @@ function OneWorkout({workouts}) {
         <p className="card-text">Duration: {workouts.duration} minutes</p>
         <p className="card-text">About workout: {workouts.description}</p>
         <p className="card-text">Price: {workouts.price}</p>
-        <p className="card-text"><small className="text-muted">Calorie burn: {workouts.calorie_burn}</small></p>
+        
+        
         
       </div>
     </div>

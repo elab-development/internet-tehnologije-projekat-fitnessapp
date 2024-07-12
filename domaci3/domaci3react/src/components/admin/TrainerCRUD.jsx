@@ -13,7 +13,7 @@ function TrainersCRUD() {
             Authorization: `Bearer ${token}`,
           },
         };
-        axios.get('api/trainer', config)
+        axios.get('api/trainers', config)
         .then((response) => {
           setTrainers(response.data.data);
         
@@ -81,7 +81,7 @@ function TrainersCRUD() {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td><button   className='btn btn-success' onClick={()=>gotToNewPage()}>Add workout</button></td>
+                    <td><button   className='btn btn-success' onClick={()=>gotToNewPage()}>Add trainer</button></td>
                   </tr>
                 </tfoot>
 

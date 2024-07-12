@@ -16,7 +16,7 @@ class GymFactory extends Factory
         return [
             'name' => $this->faker->string(),
             'street' => $this->faker->string(),
-            'street_number' => $this->faker->randomDigit(),
+            'streetNumber' => $this->faker->randomDigit(),
             'city' => $this->faker->string()
             
         ];

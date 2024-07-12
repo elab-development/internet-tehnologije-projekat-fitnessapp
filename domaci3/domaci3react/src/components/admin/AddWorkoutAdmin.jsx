@@ -23,15 +23,15 @@ function AddWorkoutAdmin({setToken}) {
        
         formData.append('price',price);
         formData.append('image', image);
-        const responce= await axios.post("api/workouts", formData, {
+        const response= await axios.post("api/workouts", formData, {
             headers:{'Content-Type':"multipart/form-data",Authorization: `Bearer ${token}` },
 
         } );
  
-        if(responce)
+        if(response)
         {
-            console.log(responce)
-            setMessage(responce.message); 
+            console.log(response)
+            setMessage(response.message); 
            
             setTimeout(()=>{
                 navigate('/adminWorkouts');
@@ -81,8 +81,8 @@ function AddWorkoutAdmin({setToken}) {
                     </div>
                     <div className="mb-3 row">
                         <label className="col-sm-3">Image</label>
-                        <div className="col-sm-5">
-                            <input type="file" className='form-control' onChange={(e)=>setImage(e.target.files[0])} />
+                        <div className="col-sm-5 " >
+                            <input type="file" className='form-control img-thumbnail ' onChange={(e)=>setImage(e.target.files[0])}  />
                         </div>
                     </div>
                     <div className="mb-3 row">

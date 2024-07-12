@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\GymCollection;
+use App\Http\Resources\GymResource;
 use App\Models\Gym;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -17,10 +18,7 @@ class GymController extends Controller
     public function index()
     {
         $gym=Gym::all();
-        if(is_null($gym)){
-            return response()->json(['message'=>"Gym not found",'status_code'=>404],404);
-        }
-        return new GymCollection($gym);
+        return GymResource::collection($gym);
     }
 
     /**
@@ -41,23 +39,30 @@ class GymController extends Controller
      */
     public function store(Request $request)
     {
+       
+         
         $validation=Validator::make($request->all(),[
             'name'=>'required|max:100|string',
             'street'=>'required|max:100|string',
-            'street_number'=>'required|min:5',
+            'streetNumber'=>'required',
             'city'=>'required|string|max:30'
         ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
-        }
+        try{
         $gym=Gym::create([
             'name'=>$request->name,
             'street'=>$request->street,
-            'street_number'=>$request->street_number,
+            'streetNumber'=>$request->streetNumber,
             'city'=>$request->city
 
         ]);
-        return response()->json($gym);
+        return response()->json([
+            'message' => "Gym successfully created."
+        ],200);
+        }catch(\Exception $e){
+            return response()->json([
+                'message' => "Something went  wrong!"
+            ],500);
+        }
     }
 
     /**
@@ -89,23 +94,38 @@ class GymController extends Controller
      * @param  \App\Models\Gym  $gym
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gym $gym)
+    public function update(Request $request,$id)
     {
-        $validation=Validator::make($request->all(),[
-            'name'=>'required|string|max:20',
-            'street'=>'required|max:100|string',
-            'street_number'=>'required|min:5',
-            'city'=>'required|string|max:30'
-        ]);
-        if($validation->fails()){
-            return response()->json($validation->errors());
+        try {
+            // Find product
+            $gym = Gym::find($id);
+            if(!$gym){
+              return response()->json([
+                'message'=>'Gym Not Found.'
+              ],404);
+            }
+      
+            
+            $gym->name = $request->name;
+            $gym->street = $request->street;
+            $gym->streetNumber = $request->streetNumber;
+            $gym->city = $request->city;
+      
+            // Update Gym
+            $gym->save();
+      
+            // Return Json Response
+            return response()->json([
+                'message' => "Gym successfully updated."
+            ],200);
+        } catch (\Exception $e) {
+            // Return Json Response
+            return response()->json([
+                'message' => "Something went really wrong!"
+            ],500);
         }
-        $gym->name=$request->name;
-        $gym->street=$request->strret;
-        $gym->street_number=$request->street_number;
-        $gym->city=$request->city;
-        $gym->save();
-        return response()->json('Gym is updated successfully.',200);
+       
+        
     }
 
     /**
@@ -119,4 +139,5 @@ class GymController extends Controller
         $gym->delete();
         return response()->json('Gym is successfully deleted.');
     }
+    
 }

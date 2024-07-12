@@ -35,7 +35,58 @@ ul.pagination > li {
 .card {
   flex: 1 0 auto;
 }
+.modal {
+  max-width: 300px;
+  margin: 50px auto;
+  background-color: #e1dee9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.modal-form h2 {
+  text-align: center;
+  color: #934683;
+}
+.input-group {
+  margin-bottom: 20px;
+}
 
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b6a6ca;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b6a6ca;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;  
+  color: #000;  
+  appearance: none; 
+}
+
+.input-group select:hover {
+  border-color: #934683;  
+}
+ 
+.input-group select:focus {
+  outline: none; 
+  border-color: #934683;  
+}
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.options label {
+  color: #934683;
+}
 .gradient-custom-2 {
   /* fallback for old browsers */
   background: #fccb90;

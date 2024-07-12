@@ -49,7 +49,7 @@ class WorkoutController extends Controller
     {
         
         try {
-            $imageName = Str::random().".".$request->image->getClientOriginalExtension();
+            $imageName = Str::random(32).".".$request->image->getClientOriginalExtension();
       
             // Create Product
             Workout::create([
@@ -90,7 +90,7 @@ class WorkoutController extends Controller
                 'message'=>'Workout not found'
             ],404);
         }
-        return new WorkoutCollection($workout);
+        return $workout;
     }
 
     /**
@@ -111,40 +111,38 @@ class WorkoutController extends Controller
      * @param  \App\Models\Workout  $workout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Workout $workout)
+    public function update(WorkoutStoreRequest $request, $id)
     {
-        $request->validate([
-                'duration'=>'required|max:255',
-                'description'=>'required|string|max:255',
-                'price'=>'required|numeric',
-                'title'=>'required|string',
-                'image'=>'nullable'
-        ]);
-
-       try{
-        $workout->fill($request->post())->update();
-        
-            if($request->hasFile('image')){
-                if($workout->image){
-                    $exists = Storage::disk('public')->exists("workout/image/{$workout->image}");
-                    if($exists){
-                        Storage::disk('public')->delete("workout/image/{$workout->image}");
-                    }
-                }
-                $imageName = Str::random().'.'.$request->image->getClientOriginalExtension();
-                Storage::disk('public')->put('workout/image', $request->image,$imageName);
-                $workout->image = $imageName;
-                $workout->save();
+        try{
+            //find workout
+            $workout=Workout::find($id);
+            if(!$workout){
+                return response()->json([
+                    'message'=>"Workout doesnt exist"
+                ],404);
             }
            
+            $workout->title=$request->title;
+            $workout->duration=$request->duration;
+            $workout->description=$request->description;
+            $workout->price=$request->price;
+            if($request->image){
+                $storage=Storage::disk("public");
+                if($storage->exists($workout->image))
+                    $storage->delete($workout->image);
+                $imageName=Str::random(32).".".$request->image->getClientOriginalExtension();
+                $workout->image=$imageName;
+                $storage->put($imageName,file_get_contents($request->image));
+            }
+            $workout->save();
             return response()->json([
-                'message'=>'Workout succesfully updated'
+                'message'=>"Workout succesfully updated"
             ],200);
-       }catch(\Exception $e){
-        return response()->json([
-            'message'=>'Something went wrong'
-        ],500);
-       }
+        }catch(\Exception $e){
+            return response()->json([
+                'message'=>"Something went wrong"
+            ],500);
+        }
     }
 
     /**
@@ -157,7 +155,11 @@ class WorkoutController extends Controller
     {
         
         $workout = Workout::find($id);
-        
+        if(!$workout){
+            return response()->json([
+                'message'=>"Workout doesnt exist"
+            ],404);
+        }
       
         // Public storage
         $storage = Storage::disk('public');

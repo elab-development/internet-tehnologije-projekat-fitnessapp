@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Workouts from './components/Workouts';
 import MyWorkouts from './components/MyWorkouts';
-
+import Trainers from './components/Trainers';
 import { useState } from 'react';
 import {BrowserRouter,Routes, Route, Link} from "react-router-dom";
 import LoginPage from './components/LoginPage';
@@ -16,9 +16,15 @@ import AddTrainerAdmin from './components/admin/AddTrainerAdmin';
 import EditWorkout from './components/admin/EditWorkout';
 import EditTrainer from './components/admin/EditTrainer';
 import TrainersCRUD from './components/admin/TrainerCRUD';
+import AddGymsAdmin from './components/admin/AddGymAdmin';
+import EditGym from './components/admin/EditGym';
+import GymsCRUD from './components/admin/GymCRUD';
+import Gym from './components/Gym';
 function App() {
-  const [workouts,setWorkouts]=useState();
+  
   const [token,setToken]=useState(null);
+  
+  
   
  
  
@@ -35,14 +41,19 @@ function App() {
          <Route path='/login' element={<LoginPage setToken={setToken} />} />
          <Route path='/register' element={<RegisterPage/>}/>
          <Route path='/' element={<Home/>}/>
-          <Route path='/workouts' element={<Workouts workouts={workouts}  />}/>
-          <Route path='/myWorkouts' element={<MyWorkouts workouts={workouts}/>}/>
+          <Route path='/workouts' element={<Workouts  />}/>
+          <Route path='/trainers' element={<Trainers   />}/>
+          <Route path='/gyms' element={<Gym  />}/>
+          <Route path='/myWorkouts' element={<MyWorkouts />}/>
          <Route path='/adminWorkouts'element={<WorkoutsCRUD/>}/>
          <Route path='/addWorkouts'element={<AddWorkoutAdmin/>}/>
          <Route path="editworkout/:id/edit" element={<EditWorkout />} />
          <Route path='/adminTrainers'element={<TrainersCRUD/>}/>
          <Route path='/addTrainers' element={<AddTrainerAdmin/>}/>
          <Route path="edittrainer/:id/edit" element={<EditTrainer />} />
+         <Route path='/adminGyms'element={<GymsCRUD/>}/>
+         <Route path='/addGyms' element={<AddGymsAdmin/>}/>
+         <Route path="editgym/:id/edit" element={<EditGym />} />
          
        
         
