@@ -1,4 +1,5 @@
-import React, { useState,useEffect,useParams } from 'react'
+import React, { useState,useEffect,useParams} from 'react'
+import { useNavigate } from 'react-router-dom';
 import OneWorkout from './OneWorkout'
 import axios from 'axios';
 import OneMyWorkout from './OneMyWorkout';
@@ -6,18 +7,23 @@ import useWorkouts from './useWorkouts';
 import InputField from './InputField';
 import useGyms from './useGyms';
 import useTrainers from './useTrainers';
-function MyWorkouts() {
+function MyWorkouts({token}) {
+  const navigate=useNavigate();
+  const [message,setMessage]=useState('');
+  
   const [workouts]=useWorkouts();
   const [gyms]=useGyms();
   const [trainers]=useTrainers();
+  
   const [formData, setFormData] = useState({
     workout_id: '',
     trainer_id:'',
     gym_id:'',
     date:'',
     time:'',
-    member_id:'',
+   
   });
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -28,7 +34,7 @@ function MyWorkouts() {
 
     const token = sessionStorage.getItem('authToken');
 
-   
+    // Kreiranje Axios POST zahtjeva sa tokenom u zaglavlju
     axios.post('api/myWorkouts', formData, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -36,14 +42,22 @@ function MyWorkouts() {
     })
       .then(response => {
         console.log(response.data.message);
-        alert(response.data.message)
-         
+        
+          
+          navigate('/');
+          
+
       })
       .catch(error => {
-        console.log("Error");
-        
+        console.error(error.response.data);
+        alert("Error");
+        // Ovdje možete dodati logiku za obradu greške
       });
   };
+   
+    
+    
+  
 
   
    
@@ -51,7 +65,8 @@ function MyWorkouts() {
     return (
       
       <form onSubmit={handleSubmit} className="modal-form">
-        <h2>Create Reservation</h2>
+        <h2>Create Plan</h2>
+        
         <div className="input-group">
             <select
                 name="workout_id"
@@ -68,6 +83,7 @@ function MyWorkouts() {
                 ))}
             </select>
             </div>
+            
         <InputField
           name="date"
           value={formData.date}

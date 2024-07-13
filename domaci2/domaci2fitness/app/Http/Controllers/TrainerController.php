@@ -60,7 +60,7 @@ class TrainerController extends Controller
       
             
             return response()->json([
-                'message' => "Workout successfully created."
+                'message' => "Trainer successfully created."
             ],200);
         } catch (\Exception $e) {
             // Return Json Response

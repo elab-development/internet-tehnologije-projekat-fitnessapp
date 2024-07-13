@@ -31,7 +31,7 @@ function Navbar({token,setToken}) {
   return (
     <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
   <div className="container-fluid">
-    <a className="navbar-brand" href="/home">My fitness portal</a>
+    <a className="navbar-brand" href="/">My fitness portal</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -52,7 +52,10 @@ function Navbar({token,setToken}) {
         {token && role==='member' && (
           <>
           <li className="nav-item">
-            <Link className="nav-link " to="/myWorkouts" >MyWorkoutPlan</Link>
+            <Link className="nav-link " to="/createPlan" >Create plan</Link>
+          </li>
+          <li>
+          <Link className="nav-link " to="/myPlans" >My workout plans</Link>
           </li>
           </>
           )}
@@ -75,14 +78,12 @@ function Navbar({token,setToken}) {
       <form className="d-flex">
       {token==null ?(
         <>
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-light" type="submit">Search</button>
+        
         <Link className="btn btn-outline-light" to="/login" style={{marginRight:2,marginLeft:2}}>Login</Link>
         </>
         ):(
           <>
-      <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-light" type="submit">Search</button>
+      
       <button className="btn btn-outline-light"  onClick={handleLogout} style={{marginRight:2,marginLeft:2}}>Logout</button>
       </>
       )}

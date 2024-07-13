@@ -20,6 +20,7 @@ import AddGymsAdmin from './components/admin/AddGymAdmin';
 import EditGym from './components/admin/EditGym';
 import GymsCRUD from './components/admin/GymCRUD';
 import Gym from './components/Gym';
+import MyWorkoutPlans from './components/MyWorkoutPlans';
 function App() {
   
   const [token,setToken]=useState(null);
@@ -44,7 +45,8 @@ function App() {
           <Route path='/workouts' element={<Workouts  />}/>
           <Route path='/trainers' element={<Trainers   />}/>
           <Route path='/gyms' element={<Gym  />}/>
-          <Route path='/myWorkouts' element={<MyWorkouts />}/>
+          <Route path='/createPlan' element={<MyWorkouts />}/>
+          <Route path='myPlans' element={<MyWorkoutPlans/>}/>
          <Route path='/adminWorkouts'element={<WorkoutsCRUD/>}/>
          <Route path='/addWorkouts'element={<AddWorkoutAdmin/>}/>
          <Route path="editworkout/:id/edit" element={<EditWorkout />} />

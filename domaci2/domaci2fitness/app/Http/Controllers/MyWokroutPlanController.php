@@ -7,6 +7,7 @@ use App\Http\Resources\MyWorkoutPlanResource;
 use App\Models\MyWorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class MyWokroutPlanController extends Controller
@@ -53,38 +54,29 @@ class MyWokroutPlanController extends Controller
      */
     public function store(Request $request)
     {
+        
+        try{
+            $user=$request->user();
         $validation=Validator::make($request->all(),[
-            'member_id'=>'required|numeric',
+            
             'workout_id'=>'required|numeric',
             'gym_id'=>'required|numeric',
             'date' => 'required|date|after_or_equal:today',
             'time' => 'required|date_format:H:i',
-            'trainer_id'=>['required|numeric',
-            function ($attribute, $value, $fail) use ($request) {
-                $startDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->date . ' ' . $request->time);
-                $endDateTime = (clone $startDateTime)->addHour(); 
-
-                //da li postoji rezervisan termin trenera u tom vremenskom razmaku
-                $check = MyWorkoutPlan::where('trainer_id', $request->trainer_id)
-                    ->where(function ($query) use ($startDateTime, $endDateTime) {
-                        $query->whereBetween('date', [$startDateTime, $endDateTime])
-                            ->orWhereBetween('time', [$startDateTime->format('H:i'), $endDateTime->format('H:i')]);
-                    })->exists();
-
-                         if ($check) {
-                                 $fail('Trainer already has appointment at this date and time.');
-                         }
-                    },
-                ]
+            'trainer_id'=>'required|numeric',
         ]);
-        try{
-        $user=$request->user();
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->errors()], 400);
+        }
+        
+        $member_id = Auth::id();
+        if (!$member_id) {
+            return response()->json(['message' => 'Korisnik nije pronađen.'], 404);
+        } 
         $request->merge(['member_id' => $user->id]);
         $myWorkoutPlan = MyWorkoutPlan::create($request->all());
         return new MyWorkoutPlanResource($myWorkoutPlan);
-        return response()->json([
-            'message' => "Plan successfully created."
-        ],200);
+        
         }catch(\Exception $e){
             return response()->json([
                 'message' => "Something went really wrong!"
@@ -129,11 +121,11 @@ class MyWokroutPlanController extends Controller
             return response()->json(['error' => 'You cannot access this workout plan!'], 403);
         }
         $validation=Validator::make($request->all(),[
-            'member_id'=>'required|numeric',
+            
             'workout_id'=>'required|numeric',
             'gym_id'=>'required|numeric',
             'date' => 'date|after_or_equal:today',
-            'time' => '',
+            'time' => 'required|date_format:H:i',
             'trainer_id'=>'required|numeric',
         ]);
         if ($validation->fails()) {
