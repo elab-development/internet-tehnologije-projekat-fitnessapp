@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -87,5 +89,29 @@ class UserController extends Controller
     {
         $user->delete();
         return response()->json("User deleted!");
+    }
+    public function reset(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|string|regex:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"',
+           
+        ]);
+
+        $status=Password::reset(
+            $request->only('email','password'),
+            function (User $user,string $password){
+                $user->forceFill([
+                    'password'=>Hash::make($password)
+                ])->save();
+            }
+        );
+
+
+        if($status===Password::PASSWORD_RESET){
+            return response()->json(['Password reset was successful.'],200);
+        }else{
+            return response()->json(['Password reset was unsuccessful.'],400);
+        }   
     }
 }

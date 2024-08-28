@@ -23,6 +23,7 @@ import Gym from './components/Gym';
 import MyWorkoutPlans from './components/MyWorkoutPlans';
 import BmiPage from './BmiPage';
 import Stats from './components/admin/Stats';
+import ResetPass from './components/ResetPass';
 
 function App() {
   
@@ -63,7 +64,7 @@ function App() {
          <Route path='/addGyms' element={<AddGymsAdmin/>}/>
          <Route path="editgym/:id/edit" element={<EditGym />} />
          <Route path="adminStats" element={<Stats />} />
-         
+         <Route path="reset" element={<ResetPass />} />
        
         
       </Routes>

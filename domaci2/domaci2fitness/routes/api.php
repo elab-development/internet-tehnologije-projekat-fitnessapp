@@ -7,10 +7,11 @@ use App\Http\Controllers\StatistikeController;
 use App\Http\Controllers\TrainerController;
 
 use App\Http\Controllers\TrainerWorkoutPlanController;
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMyWorkoutPlanController;
 
 use App\Http\Controllers\WorkoutController;
+use App\Http\Resources\UserCollection;
 use App\Models\MyWorkoutPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,7 @@ Route::resource('gym',GymController::class)->only(['index']);
 Route::resource('workout',WorkoutController::class)->only(['index']);
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
-
+Route::post('/reset',[UserController::class,'reset']);
 //bez obzira na ulogu u sistemu svi mogu da izvrse logout
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('/logout',[AuthController::class,'logout']);
@@ -67,7 +68,7 @@ Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
     Route::resource('gyms', GymController::class);
     Route::delete('/gyms/{id}',[GymController::class,'destroy']);
     Route::put('/gymsUpdate/{id}',[GymController::class,'update']); 
-    Route::get('admin/stats', [StatistikeController::class, 'stats']);
+    Route::get('admin/stats', [StatistikeController::class, 'statistikeAdmin']);
     
     
    

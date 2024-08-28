@@ -61,7 +61,7 @@ function LoginPage({setToken}) {
                   <div className="text-center pt-1 mb-5 pb-1">
                     <button data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log
                       in</button>
-                    <a className="text-muted" href="#!">Forgot password?</a>
+                    <a className="text-muted" href="/reset">Forgot password?</a>
                   </div>
 
                   <div className="d-flex align-items-center justify-content-center pb-4">

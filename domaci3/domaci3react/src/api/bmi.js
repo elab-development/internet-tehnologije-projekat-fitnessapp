@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export default function handler(req, res) {
 	if (req.method === 'GET') {
 		const weight = req.query.weight || 0;
@@ -10,22 +11,18 @@ export default function handler(req, res) {
 			headers: {
 				'X-RapidAPI-Host':
 					'body-mass-index-bmi-calculator.p.rapidapi.com',
-				'X-RapidAPI-Key': process.env.REACT_APP_NEXT_PUBLIC_RAPIDAPI_KEY
+				'X-RapidAPI-Key': 'eff268e0famsh73bbcc15dcf094cp10913cjsnf634b8c181e8'
 			}
-			
 		};
 		axios
 			.request(options)
 			.then(function (response) {
 				res.status(200).json(response.data);
-				console.log("dadadad");
 			})
 			.catch(function (error) {
 				console.error(error);
-				
 			});
 	} else {
 		res.status(400);
-		
 	}
 }
