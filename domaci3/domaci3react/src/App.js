@@ -21,6 +21,9 @@ import EditGym from './components/admin/EditGym';
 import GymsCRUD from './components/admin/GymCRUD';
 import Gym from './components/Gym';
 import MyWorkoutPlans from './components/MyWorkoutPlans';
+import BmiPage from './BmiPage';
+import Stats from './components/admin/Stats';
+
 function App() {
   
   const [token,setToken]=useState(null);
@@ -34,6 +37,8 @@ function App() {
 
   
   return (
+    
+    
     <BrowserRouter className="App">
       
        
@@ -47,6 +52,7 @@ function App() {
           <Route path='/gyms' element={<Gym  />}/>
           <Route path='/createPlan' element={<MyWorkouts />}/>
           <Route path='myPlans' element={<MyWorkoutPlans/>}/>
+          <Route path='/api/bmi' element={<BmiPage/>}/>
          <Route path='/adminWorkouts'element={<WorkoutsCRUD/>}/>
          <Route path='/addWorkouts'element={<AddWorkoutAdmin/>}/>
          <Route path="editworkout/:id/edit" element={<EditWorkout />} />
@@ -56,12 +62,14 @@ function App() {
          <Route path='/adminGyms'element={<GymsCRUD/>}/>
          <Route path='/addGyms' element={<AddGymsAdmin/>}/>
          <Route path="editgym/:id/edit" element={<EditGym />} />
+         <Route path="adminStats" element={<Stats />} />
          
        
         
       </Routes>
      
     </BrowserRouter>
+    
   );
 }
 

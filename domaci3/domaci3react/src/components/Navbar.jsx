@@ -22,7 +22,7 @@ function Navbar({token,setToken}) {
       }
     });
       setToken(null);
-      navigate('/');
+      navigate('/workouts');
       localStorage.clear();
       }catch(error){
         console.error("Error");
@@ -49,6 +49,9 @@ function Navbar({token,setToken}) {
         <li className="nav-item">
           <Link className="nav-link " to="/trainers" >Trainers</Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link " to="/api/bmi" >BMI calculator</Link>
+        </li>
         {token && role==='member' && (
           <>
           <li className="nav-item">
@@ -69,6 +72,9 @@ function Navbar({token,setToken}) {
           </li>
           <li className="nav-item">
             <Link className="nav-link " to="/adminGyms" >CRUD Gyms</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link " to="/adminStats" >Stats</Link>
           </li>
           </>
           )}

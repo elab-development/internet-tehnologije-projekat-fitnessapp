@@ -31,6 +31,7 @@ function Trainers() {
   <div className="row gx-5">
      <div className="col">
        <div className="p-3 border bg-light">
+        
           
             {
             trainers.map((trainer) => (

@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\MyWokroutPlanController;
+use App\Http\Controllers\StatistikeController;
 use App\Http\Controllers\TrainerController;
 
 use App\Http\Controllers\TrainerWorkoutPlanController;
@@ -66,7 +67,7 @@ Route::group(['middleware' => ['auth:sanctum','role:admin']], function () {
     Route::resource('gyms', GymController::class);
     Route::delete('/gyms/{id}',[GymController::class,'destroy']);
     Route::put('/gymsUpdate/{id}',[GymController::class,'update']); 
-    
+    Route::get('admin/stats', [StatistikeController::class, 'stats']);
     
     
    
