@@ -91,6 +91,7 @@ function AddWorkoutAdmin({setToken}) {
                             <button type="submit" className='btn btn-success' >Submit</button>
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>

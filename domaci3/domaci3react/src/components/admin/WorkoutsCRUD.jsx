@@ -13,13 +13,15 @@ function WorkoutsCRUD() {
             Authorization: `Bearer ${token}`,
           },
         };
-        axios.get('api/workout', config)
+        axios.get('api/workouts', config)
         .then((response) => {
           setWorkouts(response.data.data);
+          
         
         })
         .catch((err) => {
           console.log("error");
+          
         });
         }, []);
         const navigate = useNavigate()
@@ -42,7 +44,7 @@ function WorkoutsCRUD() {
             alert("Error while deleting");
           }
         };
-
+        
           
   return (
    <div className="container container_overflow">
@@ -86,9 +88,11 @@ function WorkoutsCRUD() {
                   <tr>
                     <td><button   className='btn btn-success' onClick={()=>gotToNewPage()}>Add workout</button></td>
                   </tr>
+                  
                 </tfoot>
 
             </table>
+            
         </div>
     </div>
    </div>

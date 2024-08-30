@@ -73,9 +73,7 @@ function Navbar({token,setToken}) {
           <li className="nav-item">
             <Link className="nav-link " to="/adminGyms" >CRUD Gyms</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link " to="/adminStats" >Stats</Link>
-          </li>
+         
           </>
           )}
       </ul>

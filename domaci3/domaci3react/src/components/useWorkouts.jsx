@@ -13,7 +13,7 @@ const useWorkouts = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get('api/workout', config)
+      axios.get('api/workoutHome', config)
       .then((response) => {
         setWorkouts(response.data.data);
       

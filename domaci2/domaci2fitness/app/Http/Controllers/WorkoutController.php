@@ -25,8 +25,11 @@ class WorkoutController extends Controller
     }
     public function indexPagination()
     {
-        
-        return WorkoutResource::collection(Workout::paginate(2));
+        $workouts=Workout::paginate(2);
+        return response()->json([
+            'results' => $workouts
+       ],200);
+       
     }
 
     /**

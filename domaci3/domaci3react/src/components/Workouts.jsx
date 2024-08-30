@@ -1,64 +1,96 @@
-import React from 'react';
+import React from 'react'
+import { useEffect, useState } from "react";
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Route } from 'react-router-dom';
+import { Pagination, usePaginationParams } from "react-laravel-pagination";
 import OneWorkout from './OneWorkout';
-import ReactPaginate from 'react-paginate';
-
 function Workouts() {
- 
   const [workouts, setWorkouts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const workoutsPerPage = 2;
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    axios.get('api/workout', config)
-    .then((response) => {
-      setWorkouts(response.data.data);
-    
-    })
-    .catch((err) => {
-      console.log("error");
-    });
-    }, []);
-const handlePageChange = ({ selected }) => {
-  setCurrentPage(selected);
-};
-const pageCount = Math.ceil(workouts.length / workoutsPerPage);
-const offset = currentPage * workoutsPerPage;
-const currentWorkouts = workouts.slice(offset, offset + workoutsPerPage);
+  const [info, setInfo] = useState({});
+  const url = "api/workoutHome";
   
-    return (
-     
-  <div className="row gx-5">
-     <div className="col">
-       <div className="p-3 border bg-light">
-       <ReactPaginate
-              previousLabel={'Previous'}
-              nextLabel={'Next'}
-              breakLabel={'...'}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageChange}
-              containerClassName={'pagination'}
-              activeClassName={'active'}
-            />
-            {currentWorkouts.map((workout) => (
-              <OneWorkout key={workout.id} workouts={workout}  />  
-            ))}
-       </div>
-     </div>
+  const fetchWorkouts = (url) => {
+    axios
+      .get(url)
+      .then((data) => {
+        setWorkouts(data.data.results.data);
+        //console.log(data.data.results.data);
+        setInfo(data.data.results);
+        //console.log(data.data.results.next_page_url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
     
-   </div>
+  const handleNextPage = () => {
+    fetchWorkouts(info.next_page_url);
+    window.scrollTo(0, 0);
+  };
+  
+  const handlePreviousPage = () => {
+    fetchWorkouts(info.prev_page_url);
+    window.scrollTo(0, 0);
+  };
+    
+  useEffect(() => {
+    fetchWorkouts(url);
+  }, []);
+  
+  
+  return (
+    <>
+      
+  
+     
+        <nav>
+  
+          <ul className="pagination justify-content-center">
+            {info.prev_page_url ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handlePreviousPage}>
+                  Previous
+                </button>
+              </li>
+            ) : null}
+            {info.next_page_url ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handleNextPage}>
+                  Next
+                </button>
+              </li>
+            ) : null}
+          </ul>
+  
+        </nav>
+      
+        
+      {workouts.map((workouts) => (
+              <OneWorkout key={workouts.id} workouts={workouts} />  
+            ))}
+  
+      <div className="container pb-5">
+        <nav>
+          <ul className="pagination justify-content-center">
+            {info.prev_page_url ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handlePreviousPage}>
+                  Previous
+                </button>
+              </li>
+            ) : null}
+            {info.next_page_url ? (
+              <li className="page-item">
+                <button className="page-link" onClick={handleNextPage}>
+                  Next
+                </button>
+              </li>
+            ) : null}
+          </ul>
+        </nav>
+      </div>
+        
+    </>
   );
-};
+}
 
 export default Workouts
-   
