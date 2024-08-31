@@ -6,8 +6,13 @@ Admin ima mogućnosti unosa, izmene i brisanja postojećih treninga, trenera i t
 Sva tri nivoa pristupa imaju mogućnost računanja indeksa telesne težine pomoću BMI kalkulatora koji predstavlja poziv javnog web servisa.
 
 Za pokretanje Laravel dela:
+
 cd domaci2fitness
+
 php serve
+
 Za pokretanje React dela u cmd-u:
+
 cd domaci3react
+
 npm start
