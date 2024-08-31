@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import OneTrainer from './OneTrainer';
+import { Link } from 'react-router-dom';
 function Trainers() {
  
   const [trainers, setTrainers] = useState([]);
@@ -26,12 +27,32 @@ function Trainers() {
       });
   }, []);
   
+  const download = async() => {
+    try{
+      const response=await axios
+      .get('api/workout.pdf',{responseType:'blob'})
+      const pdfFile=new Blob([response.data],{type:"application/pdf"});
+      const url=window.URL.createObjectURL(pdfFile);
+      const tempLink=document.createElement("a");
+      tempLink.href=url;
+      tempLink.setAttribute(
+      "download",
+      `workouts.pdf`
+      );
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      window.URL.revokeObjectURL(url);
+    }catch(error){
+      console.log(error);
+    }
+  }
     return (
      
-  <div className="row gx-5">
+  <div className="row gx-5">c
      <div className="col">
        <div className="p-3 border bg-light">
-        
+         <button onClick={download}>Download available workouts!</button>
           
             {
             trainers.map((trainer) => (

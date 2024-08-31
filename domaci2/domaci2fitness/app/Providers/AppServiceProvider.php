@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-
+use App\Models\User;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,8 +24,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        PaginationPaginator::useBootstrap();
     }
 }

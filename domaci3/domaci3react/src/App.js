@@ -64,7 +64,7 @@ function App() {
          <Route path='/adminGyms'element={<GymsCRUD/>}/>
          <Route path='/addGyms' element={<AddGymsAdmin/>}/>
          <Route path="editgym/:id/edit" element={<EditGym />} />
-         
+         <Route path="reset" element={<ResetPass />} />
          
        
         

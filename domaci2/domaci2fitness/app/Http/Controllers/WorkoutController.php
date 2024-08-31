@@ -6,6 +6,7 @@ use App\Http\Requests\WorkoutStoreRequest;
 use App\Http\Resources\WorkoutCollection;
 use App\Http\Resources\WorkoutResource;
 use App\Models\Workout;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -224,4 +225,5 @@ class WorkoutController extends Controller
 
         return WorkoutResource::collection($workouts);
     }
+   
 }
